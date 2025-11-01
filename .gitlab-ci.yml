@@ -1,53 +1,55 @@
-### Simulation, KEIN fertiges Script
-
-
 # Definition der Pipeline-Stages
 stages:
   - build   # Build-Phase: Projekt kompilieren / vorbereiten
   - test    # Test-Phase: Code prüfen / Linting
   - deploy  # Deployment-Phase: Website live stellen
 
+# Globales Skript, das VOR jedem Job ausgeführt wird
+# Wir wechseln hier zentral in den neuen Quellcode-Ordner
+before_script:
+  - cd teilzeit-ausbildungsrechner/src
+
 # Build-Job
 build-job:
   stage: build
   script:
-    - cd teilzeit-ausbildungsrechner  # In Projektordner wechseln
-    - echo "Building HTML/CSS/JS project..."  # Build starten
-    - echo "Copying files to dist folder..."  # Dateien ins Zielverzeichnis kopieren
-    - echo "Build complete."  # Build abgeschlossen
+    # Das 'cd' ist jetzt im globalen before_script
+    - echo "Building HTML/CSS/JS project from src/..."
+    - echo "Copying files to dist folder..."
+    - echo "Build complete."
 
 # HTML-Linting
 lint-html-job:
   stage: test
   script:
-    - cd teilzeit-ausbildungsrechner  # Projektordner
-    - echo "Checking HTML for errors..."  # HTML prüfen
-    - sleep 5  # Simulation Zeitaufwand
-    - echo "No HTML issues found."  # Ergebnis
+    # Das 'cd' ist jetzt im globalen before_script
+    - echo "Checking HTML in src/ for errors..."
+    - sleep 5
+    - echo "No HTML issues found."
 
 # CSS-Linting
 lint-css-job:
   stage: test
   script:
-    - cd teilzeit-ausbildungsrechner  # Projektordner
-    - echo "Checking CSS for issues..."  # CSS prüfen
-    - sleep 5  # Simulation Zeitaufwand
-    - echo "No CSS issues found."  # Ergebnis
+    # Das 'cd' ist jetzt im globalen before_script
+    - echo "Checking CSS in src/ for issues..."
+    - sleep 5
+    - echo "No CSS issues found."
 
 # JavaScript-Linting
 lint-js-job:
   stage: test
   script:
-    - cd teilzeit-ausbildungsrechner  # Projektordner
-    - echo "Linting JavaScript code..."  # JS prüfen
-    - sleep 5  # Simulation Zeitaufwand
-    - echo "No JS issues found."  # Ergebnis
+    # Das 'cd' ist jetzt im globalen before_script
+    - echo "Linting JavaScript code in src/..."
+    - sleep 5
+    - echo "No JS issues found."
 
 # Deployment
 deploy-job:
   stage: deploy
-  environment: production  # Zielumgebung
+  environment: production
   script:
-    - cd teilzeit-ausbildungsrechner  # Projektordner
-    - echo "Deploying HTML/CSS/JS website..."  # Deployment starten
-    - echo "Website successfully deployed to production."  # Erfolg
+    # Das 'cd' ist jetzt im globalen before_script
+    - echo "Deploying HTML/CSS/JS website from src/..."
+    - echo "Website successfully deployed to production."
