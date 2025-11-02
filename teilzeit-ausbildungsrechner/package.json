@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint:html": "htmlhint .",
+    "lint:css": "stylelint \"**/*.css\"",
+    "lint:js": "eslint .",
+    "lint": "npm run lint:html && npm run lint:css && npm run lint:js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +18,13 @@
   "type": "commonjs",
   "devDependencies": {
     "vite": "^7.1.12",
-    "vite-plugin-handlebars": "^2.0.0"
+    "vite-plugin-handlebars": "^2.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.0.0",
+    "htmlhint": "^1.0.0",
+    "prettier": "^3.6.2",
+    "stylelint": "^15.0.0",
+    "stylelint-config-standard": "^30.0.0"
   }
 }

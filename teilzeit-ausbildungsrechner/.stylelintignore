@@ -1,0 +1,5 @@
+# Ignoriere Build-Artefakte
+public/
+
+# Ignoriere installierte Pakete
+node_modules/
