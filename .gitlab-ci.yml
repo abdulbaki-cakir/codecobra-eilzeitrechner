@@ -1,54 +1,52 @@
-# Definition der Pipeline-Stages
 stages:
-  - build   # Build-Phase: Projekt kompilieren / vorbereiten
-  - test    # Test-Phase: Code prüfen / Linting
-  - deploy  # Deployment-Phase: Website live stellen
+  - build
+  - test
 
-# Globales Skript, das VOR jedem Job ausgeführt wird
-# KORRIGIERT: Wir wechseln jetzt in den Haupt-Projektordner,
-# wo die package.json und die index.html liegen (nicht mehr in /src)
-before_script:
-  - cd teilzeit-ausbildungsrechner
+# Vorlage für alle Jobs: Caching und Installation
+.setup-template: &setup
+  image: node:20-alpine
+  cache:
+    key:
+      files:
+        - teilzeit-ausbildungsrechner/package-lock.json
+    paths:
+      - teilzeit-ausbildungsrechner/node_modules/
+  before_script:
+    - cd teilzeit-ausbildungsrechner
+    - npm install
 
-# Build-Job
+# 1. Job: BUILD (aus der 'build'-Stage)
+# Wird zuerst ausgeführt
 build-job:
+  <<: *setup
   stage: build
   script:
-    # Das 'cd' ist jetzt im globalen before_script
-    - echo "Building project from teilzeit-ausbildungsrechner/..."
-    - echo "Simulating build..."
-    - sleep 5
-    - echo "Build complete."
+    - echo "Building project with Vite..."
+    - npm run build
+  artifacts:
+    paths:
+      - teilzeit-ausbildungsrechner/dist/
 
-# HTML-Linting
+# 2. Jobs: LINTER (alle aus der 'test'-Stage)
+# Diese 3 Jobs laufen jetzt parallel, nachdem 'build-job' erfolgreich war.
+
 lint-html-job:
+  <<: *setup
   stage: test
   script:
-    - echo "Checking HTML in root for errors..."
-    - sleep 5
-    - echo "No HTML issues found."
+    - echo "Checking HTML..."
+    - npm run lint:html # Führt nur 'htmlhint .' aus
 
-# CSS-Linting
 lint-css-job:
+  <<: *setup
   stage: test
   script:
-    - echo "Checking CSS in src/ for issues..."
-    - sleep 5
-    - echo "No CSS issues found."
+    - echo "Checking CSS..."
+    - npm run lint:css # Führt nur 'stylelint "**/*.css"' aus
 
-# JavaScript-Linting
 lint-js-job:
+  <<: *setup
   stage: test
   script:
-    - echo "Linting JavaScript code in src/..."
-    - sleep 5
-    - echo "No JS issues found."
-
-# Deployment
-deploy-job:
-  stage: deploy
-  environment: production
-  script:
-    - echo "Deploying simulated website..."
-    - sleep 5
-    - echo "Website successfully deployed to production."
+    - echo "Checking JavaScript..."
+    - npm run lint:js # Führt nur 'eslint .' aus

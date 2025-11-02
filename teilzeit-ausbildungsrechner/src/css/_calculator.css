@@ -11,7 +11,7 @@
 #calculator-section .step.active i { background-color: #000; border-color: #000; color: #fff; }
 #calculator-section .calculator-form { margin: 3rem 0; }
 #calculator-section .calculator-form h2 { text-align: center; margin-bottom: 2rem; font-weight: 400; font-size: 1.8rem; }
-#calculator-section .input-group { display: flex; align-items: center; gap: 15px; max-width: 500px; margin: 0 auto 1.5rem auto; position: relative; }
+#calculator-section .input-group { display: flex; align-items: center; gap: 15px; max-width: 500px; margin: 0 auto 1.5rem; position: relative; }
 #calculator-section .input-container-nested { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 50px; background-color: var(--calculator-input-bg); border-radius: 50px; padding: 6px 6px 6px 1.5rem; }
 #calculator-section .input-prefix { flex-grow: 1; display: flex; align-items: center; gap: 0.75rem; color: white; font-size: 1rem; white-space: normal; }
 #calculator-section .input-prefix i { color: #fff; font-size: 1.1rem; }
@@ -21,7 +21,7 @@
 #calculator-section .info-icon-wrapper .fa-info-circle { color: #000; font-size: 1.2rem; cursor: pointer; }
 #calculator-section .info-box { display: none; position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: 250px; background-color: #1a1a1a; color: white; padding: 1rem; border-radius: 8px; font-size: 0.9rem; text-align: left; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 10; }
 #calculator-section .info-icon-wrapper:hover .info-box { display: block; }
-#calculator-section .info-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 8px; border-style: solid; border-color: #1a1a1a transparent transparent transparent; }
+#calculator-section .info-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 8px; border-style: solid; border-color: #1a1a1a transparent transparent; }
 #calculator-section .form-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 3rem; }
 #calculator-section button { padding: 0.8rem 2rem; border-radius: 8px; border: 1px solid #000; font-size: 1rem; cursor: pointer; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
 #calculator-section button.primary { background-color: #000; color: white; }

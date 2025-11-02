@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap');
 
 :root {
-    --bg-color: #ffffff;
+    --bg-color: #fff;
     --text-color: #1a1a1a;
     --text-light: #555;
-    --primary-button-text: #ffffff;
+    --primary-button-text: #fff;
     --card-bg: rgba(255, 255, 255, 0.95);
     --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     --card-border: rgba(0, 0, 0, 0.05);
