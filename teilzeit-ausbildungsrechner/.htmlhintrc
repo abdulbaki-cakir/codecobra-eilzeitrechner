@@ -1,5 +1,12 @@
 {
-    "exclude": [
-        "partials/**"
-    ]
+  "doctype-first": true,
+  "tag-pair": true,
+  "spec-char-escape": false,
+  "attr-lowercase": true,
+  "attr-value-double-quotes": true,
+  "tag-self-close": true,
+
+  "exclude": [
+    "dist/**"
+  ]
 }
