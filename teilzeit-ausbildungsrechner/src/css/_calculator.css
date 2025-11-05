@@ -22,9 +22,13 @@
 #calculator-section .info-box { display: none; position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: 250px; background-color: #1a1a1a; color: white; padding: 1rem; border-radius: 8px; font-size: 0.9rem; text-align: left; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 10; }
 #calculator-section .info-icon-wrapper:hover .info-box { display: block; }
 #calculator-section .info-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 8px; border-style: solid; border-color: #1a1a1a transparent transparent; }
+#calculator-section .icon { width: 1em; height: 1em; display: inline-block; vertical-align: middle; fill: currentColor; stroke: none; }
+
 #calculator-section .form-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 3rem; }
-#calculator-section button { padding: 0.8rem 2rem; border-radius: 8px; border: 1px solid #000; font-size: 1rem; cursor: pointer; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
-#calculator-section button.primary { background-color: #000; color: white; }
-#calculator-section button.primary:hover { background-color: #1a1a1a; }
-#calculator-section button.secondary { background-color: transparent; color: #000; }
-#calculator-section button.secondary:hover { background-color: #f4f4f4; }
+#calculator-section button { padding: 0.6rem 1.25rem; border-radius: 8px; border: 1px solid #000; font-size: 1rem; cursor: pointer; transition: background-color 0.18s, color 0.18s, border-color 0.18s, transform 0.12s; min-height:44px; display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; }
+#calculator-section button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+#calculator-section button:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,0,0,0.08); }
+#calculator-section button.primary { background-color: #000; color: #fff; border-color: #000; }
+#calculator-section button.primary:hover { background-color: #111; transform: translateY(-1px); }
+#calculator-section button.secondary { background-color: #fff; color: #000; border-color: #000; }
+#calculator-section button.secondary:hover { background-color: #fafafa; transform: translateY(-1px); }

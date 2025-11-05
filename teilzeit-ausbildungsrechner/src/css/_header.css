@@ -51,25 +51,40 @@ nav {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background-color: #222;
-    color: #fff;
-    border-radius: 50px;
-    padding: 10px 20px;
+    background-color: #fff; /* white background */
+    color: #000; /* black text */
+    border-radius: 8px;
+    padding: 8px 16px;
     font-size: 16px;
     font-weight: 700;
     text-decoration: none;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.12s ease;
+    border: 1px solid #000; /* black border */
 }
 
 .nav-btn:hover {
-    background-color: #444;
-    transform: translateY(-2px);
+    background-color: #fafafa;
+    transform: translateY(-1px);
+}
+
+.nav-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
 }
 
 .nav-btn svg {
-    fill: #fff;
+    fill: currentColor;
     width: 18px;
     height: 18px;
+}
+
+.icon {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    vertical-align: middle;
+    fill: currentColor;
+    stroke: none;
 }
 
 /* --- Dropdown Styles --- */
