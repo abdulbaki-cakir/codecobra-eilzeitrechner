@@ -1,4 +1,24 @@
-#calculator-section { padding: 5rem 2rem; }
+/* Basiseinstellungen + lokale Custom Properties in EINEM Block */
+#calculator-section {
+  padding: 5rem 2rem;
+
+  /* Lokale Custom Properties für konsistente Abstände/Größen */
+  --rc-radius: 20px;
+  --rc-gap: 0.8rem;
+  --rc-padding-y: 1.2rem;
+  --rc-padding-x: 1.5rem;
+  --rc-size: 20px;            /* Radio outer size */
+  --rc-stroke: 2px;           /* Radio border width */
+  --rc-dot-size: 10px;        /* Radio inner dot size */
+  --rc-fg: #fff;              /* Vordergrund (Text/Radio) */
+  --rc-fg-muted: #ccc;        /* Subtext */
+  --rc-sep: rgba(255,255,255,0.15);
+  --rc-hover: rgba(255,255,255,0.85);
+  --rc-focus: 0 0 0 3px rgba(255,255,255,0.35);
+  --rc-shadow: 0 6px 24px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.12);
+  --rc-transition: 160ms ease;
+}
+
 #calculator-section .container { width: 100%; max-width: 800px; background: var(--bg-color); padding: 2rem; }
 #calculator-section header { position: static; text-align: center; margin-bottom: 2rem; margin-top: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid #ddd; border: none !important; box-shadow: none !important; }
 #calculator-section header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; white-space: normal; word-break: break-word; }
@@ -33,29 +53,10 @@
 #calculator-section button.secondary { background-color: #fff; color: #000; border-color: #000; }
 #calculator-section button.secondary:hover { background-color: #fafafa; transform: translateY(-1px); }
 
-
 /* ==========================================================================
    Calculator – Radio Card
    Ziel: Optik & UX verbessern, ohne Funktion zu ändern
    ========================================================================== */
-
-#calculator-section {
-  /* Lokale Custom Properties für konsistente Abstände/Größen */
-  --rc-radius: 20px;
-  --rc-gap: 0.8rem;
-  --rc-padding-y: 1.2rem;
-  --rc-padding-x: 1.5rem;
-  --rc-size: 20px;            /* Radio outer size */
-  --rc-stroke: 2px;           /* Radio border width */
-  --rc-dot-size: 10px;        /* Radio inner dot size */
-  --rc-fg: #fff;              /* Vordergrund (Text/Radio) */
-  --rc-fg-muted: #ccc;        /* Subtext */
-  --rc-sep: rgba(255,255,255,0.15);
-  --rc-hover: rgba(255,255,255,0.85);
-  --rc-focus: 0 0 0 3px rgba(255,255,255,0.35);
-  --rc-shadow: 0 6px 24px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.12);
-  --rc-transition: 160ms ease;
-}
 
 /* Gruppe */
 #calculator-section .radio-card-group {
