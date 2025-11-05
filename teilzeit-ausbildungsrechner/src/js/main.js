@@ -9,5 +9,4 @@ function initializeApp() {
     // (z.B. Event-Listener für den Rechner)
   }, 0);
 }
-
 initializeApp();
