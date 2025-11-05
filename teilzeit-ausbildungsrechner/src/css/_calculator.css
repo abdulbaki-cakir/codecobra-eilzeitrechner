@@ -201,20 +201,6 @@
   border-radius: 1px;
 }
 
-/* Responsiveness: etwas mehr Luft auf engen Viewports */
-@media (max-width: 480px) {
-  #calculator-section .radio-card-container {
-    padding: 1rem 1rem;
-    border-radius: calc(var(--rc-radius) - 4px);
-  }
-  #calculator-section .radio-card-header h4 {
-    font-size: .98rem;
-  }
-  #calculator-section .radio-card-option {
-    font-size: .94rem;
-  }
-}
-
 /* High Contrast Nutzer-Präferenzen */
 @media (prefers-contrast: more) {
   #calculator-section .radio-card-option .radio-custom {
