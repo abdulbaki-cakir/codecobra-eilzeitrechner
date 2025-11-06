@@ -61,7 +61,7 @@
 /* Gruppe */
 #calculator-section .radio-card-group {
   /* Stellt sicher, dass die Info-Box korrekt positioniert ist */
-  align-items: flex-start;
+  align-items: center;
   padding-top: 10px; /* Kleiner Abstand oben für die Info-Box */
 }
 

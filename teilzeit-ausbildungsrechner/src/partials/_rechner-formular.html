@@ -4,20 +4,20 @@
   <p>Wie lange dauert deine Ausbildung? Finde es hier sofort heraus.</p>
 </header>
 <div class="progress-container">
-  <div class="step active">
+  <div class="step active" data-step="1">
     <i class="fas fa-home"></i>
     <p>Start</p>
   </div>
-  <div class="step">
+  <div class="step" data-step="2">
     <i class="fas fa-sliders"></i>
     <p>Anpassung der Dauer</p>
   </div>
-  <div class="step">
+  <div class="step" data-step="3">
     <i class="fas fa-chart-line"></i>
     <p>Ergebnisse</p>
   </div>
 </div>
-<main class="calculator-form">
+<main class="calculator-form" id="step-1">
   <h2>1. Basis Daten</h2>
   <div class="input-group">
     <div class="input-container-nested">
@@ -60,10 +60,10 @@
       <div class="info-box">WIP</div>
     </div>
   </div>
-  <div class="form-buttons">
-    <button class="secondary" type="button" disabled>Zurück</button
-    ><button class="primary" type="button">Weiter</button>
-  </div>
+    <div class="form-buttons">
+        <button class="secondary" disabled>Zurück</button>
+        <button class="primary" id="next-btn-1">Weiter</button>
+    </div>
 </main>
 
 <!-- Step 2 -->
@@ -248,7 +248,22 @@
   </div>
 
  <div class="form-buttons">
-    <button class="secondary" type="button" disabled>Zurück</button
-    ><button class="primary" type="button">Weiter</button>
+    <button class="secondary" type="button" id="back-btn-2">Zurück</button>
+    <button class="primary" id="next-btn-2">Weiter</button>
   </div>
 </main>
+
+<main class="calculator-form hidden" id="step-3">
+  <h2>3. Ergebnisse</h2>
+    <div class="form-buttons">
+        <button class="secondary" id="back-btn-3">Zurück</button>
+        <button class="primary pdf-btn"><i class="fas fa-download"></i> Als PDF ausdrucken</button>
+    </div>
+</main>
+
+
+<style>
+    .hidden {
+        display: none !important;
+    }
+</style>

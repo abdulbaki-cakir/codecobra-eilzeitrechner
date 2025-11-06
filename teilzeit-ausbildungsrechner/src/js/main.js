@@ -1,12 +1,11 @@
-/**
- * INITIALISIERT ALLE JS-FUNKTIONEN DER SEITE
- */
-function initializeApp() {
-  setTimeout(() => {
-    console.log("App initialisiert.");
+import { initializeCalculator } from './modules/calculatorController.js';
 
-    // Hier kommt der eigentliche Code
-    // (z.B. Event-Listener für den Rechner)
-  }, 0);
+// Hauptfunktion, die die App startet
+async function main() {
+    setTimeout(() => {
+        initializeCalculator();
+       
+    }, 0);
 }
-initializeApp();
+
+main();
