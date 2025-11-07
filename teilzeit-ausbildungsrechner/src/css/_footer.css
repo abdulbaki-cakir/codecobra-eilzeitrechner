@@ -23,7 +23,7 @@
 .footer-column h4 {
     margin-bottom: 15px;
     font-weight: 700;
-    color: #ffffff;
+    color: #fff;
 }
 
 .footer-column ul {
@@ -37,17 +37,17 @@
 }
 
 .footer-column a {
-    color: #cccccc;
+    color: #ccc;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .footer-column a:hover {
-    color: #ffffff;
+    color: #fff;
 }
 
 .footer-column p {
-    color: #cccccc;
+    color: #ccc;
     line-height: 1.6;
 }
 
