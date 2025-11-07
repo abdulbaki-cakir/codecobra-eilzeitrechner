@@ -29,7 +29,18 @@
 #calculator-section .step p { font-size: 0.8rem; white-space: nowrap; background-color: var(--bg-color); padding: 0 5px; }
 #calculator-section .step.active p { color: #000; }
 #calculator-section .step.active i { background-color: #000; border-color: #000; color: #fff; }
-#calculator-section .calculator-form { margin: 3rem 0; }
+#calculator-section .calculator-form {
+    /* --- Das ist der Card-Look --- */
+    background: #fff;
+    border: 2px solid #e1e1e1;
+    border-radius: 28px;
+    padding: 2.25rem 1.75rem;
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.35);
+
+    /* --- Zentrierung der Karte selbst --- */
+    max-width: 640px; /* Setzt eine maximale Breite für die Karte */
+    margin: 3rem auto;  /* Behält deinen Top/Bottom-Abstand bei und zentriert die Karte */
+}
 #calculator-section .calculator-form h2 { text-align: center; margin-bottom: 2rem; font-weight: 400; font-size: 1.8rem; }
 #calculator-section .input-group { display: flex; align-items: center; gap: 15px; max-width: 500px; margin: 0 auto 1.5rem; position: relative; }
 #calculator-section .input-container-nested { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 50px; background-color: var(--calculator-input-bg); border-radius: 50px; padding: 6px 6px 6px 1.5rem; }
