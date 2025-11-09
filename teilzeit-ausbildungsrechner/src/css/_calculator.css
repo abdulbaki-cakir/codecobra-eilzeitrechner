@@ -7,11 +7,11 @@
   --rc-gap: 0.8rem;
   --rc-padding-y: 1.2rem;
   --rc-padding-x: 1.5rem;
-  --rc-size: 20px;            /* Radio outer size */
-  --rc-stroke: 2px;           /* Radio border width */
-  --rc-dot-size: 10px;        /* Radio inner dot size */
-  --rc-fg: #fff;              /* Vordergrund (Text/Radio) */
-  --rc-fg-muted: #ccc;        /* Subtext */
+  --rc-size: 20px;
+  --rc-stroke: 2px;
+  --rc-dot-size: 10px;
+  --rc-fg: #fff;
+  --rc-fg-muted: #ccc;
   --rc-sep: rgba(255,255,255,0.15);
   --rc-hover: rgba(255,255,255,0.85);
   --rc-focus: 0 0 0 3px rgba(255,255,255,0.35);
@@ -19,7 +19,7 @@
   --rc-transition: 160ms ease;
 }
 
-#calculator-section .container { width: 100%; max-width: 800px; background: var(--bg-color); padding: 2rem; }
+#calculator-section .container { width: 100%; max-width: 700px; background: var(--bg-color); padding: 2rem; }
 #calculator-section header { position: static; text-align: center; margin-bottom: 2rem; margin-top: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid #ddd; border: none !important; box-shadow: none !important; }
 #calculator-section header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; white-space: normal; word-break: break-word; }
 #calculator-section header p { color: #666; font-size: 0.95rem; }
@@ -38,11 +38,11 @@
     box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.35);
 
     /* --- Zentrierung der Karte selbst --- */
-    max-width: 640px; /* Setzt eine maximale Breite für die Karte */
-    margin: 3rem auto;  /* Behält deinen Top/Bottom-Abstand bei und zentriert die Karte */
+    max-width: 700px;
+    margin: 3rem auto;
 }
 #calculator-section .calculator-form h2 { text-align: center; margin-bottom: 2rem; font-weight: 400; font-size: 1.8rem; }
-#calculator-section .input-group { display: flex; align-items: center; gap: 15px; max-width: 500px; margin: 0 auto 1.5rem; position: relative; }
+#calculator-section .input-group { display: flex; align-items: center; gap: 15px; max-width: 600px; margin: 0 auto 1.5rem; position: relative; }
 #calculator-section .input-container-nested { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 50px; background-color: var(--calculator-input-bg); border-radius: 50px; padding: 6px 6px 6px 1.5rem; }
 #calculator-section .input-prefix { flex-grow: 1; display: flex; align-items: center; gap: 0.75rem; color: white; font-size: 1rem; white-space: normal; }
 #calculator-section .input-prefix i { color: #fff; font-size: 1.1rem; }
@@ -50,9 +50,39 @@
 #calculator-section .input-container-nested select { appearance: none; -webkit-appearance: none; -moz-appearance: none; padding-right: 30px; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 10px center; background-size: 16px 16px; }
 #calculator-section .info-icon-wrapper { position: relative; flex-shrink: 0; }
 #calculator-section .info-icon-wrapper .fa-info-circle { color: #000; font-size: 1.2rem; cursor: pointer; }
-#calculator-section .info-box { display: none; position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: 250px; background-color: #8f8f8f; color: white; padding: 1rem; border-radius: 8px; font-size: 0.9rem; text-align: left; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 10; }
+#calculator-section .info-box {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: -20px;
+  left: auto;
+  transform: none;
+  min-width: 320px;
+  max-width: min(420px, calc(100vw - 24px));
+  background-color: #2b2b2b;
+  color: #fff;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #3d3d3d; 
+  font-size: 0.92rem;
+  line-height: 1.4;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 2px 10px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+  overflow: visible;
+  overflow-wrap: anywhere;
+}
 #calculator-section .info-icon-wrapper:hover .info-box { display: block; }
-#calculator-section .info-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 8px; border-style: solid; border-color: #8f8f8f transparent transparent; }
+#calculator-section .info-icon-wrapper.open .info-box { display: block; }
+#calculator-section .info-box::after {
+  content: '';
+  position: absolute;
+  top: calc(100% - 1px);
+  right: 20px;
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: #2b2b2b transparent transparent;
+}
 #calculator-section .icon { width: 1em; height: 1em; display: inline-block; vertical-align: middle; fill: #000; stroke: none; }
 
 #calculator-section .form-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 3rem; }
@@ -230,4 +260,16 @@
   #calculator-section .radio-card-option .radio-custom::after {
     transition: none;
   }
+}
+
+
+/* Mobile */
+@media (max-width: 1024px) {
+  #calculator-section .container { padding: 0;}
+  #calculator-section { padding: 7rem 1rem;}
+  #calculator-section .calculator-form {padding: 2rem 1rem; margin: 0;}
+  #calculator-section .input-container-nested { border-radius: 20px; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
+  #calculator-section .input-container-nested input { width: 100%;}
+  #calculator-section .input-container-nested select {width: 100%;}
+  #calculator-section .input-prefix {padding-left: 10px;}
 }

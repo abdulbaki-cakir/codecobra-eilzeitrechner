@@ -1,16 +1,17 @@
-PROJEKT STARTEN
+Projektstart
 
 
-VORAUSSETZUNG: NODE JS INSTALLIERT
-
---------------------------------------
-
-Im Projektordner, da wo sich der INDEX befindet
-
-npm install   (nur einmal dann nie wieder)
-
-dann npm run dev
+Voraussetzungen:
+- Node.js muss installiert sein.
 
 --------------------------------------
 
-auf dem Webbrowser auf http://localhost:5173/
+cd teilzeit-ausbildungsrechner (Im Projektordner, da wo sich der INDEX befindet)
+
+npm install (nur einmal dann nie wieder)
+
+npm run dev
+
+--------------------------------------
+
+Auf einem Browser http://localhost:5173/ öffnen.
