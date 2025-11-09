@@ -1,5 +1,6 @@
 // Importiere die getrennten Module
 import * as View from './calculatorView.js';
+import { initializeTooltips } from './tooltips.js';
 
 
 let currentStep = 1;
@@ -46,6 +47,8 @@ export function initializeCalculator() {
 
     // --- 2. Initialen Zustand setzen ---
     View.showStep(currentStep); // Zeige Schritt 1 beim Start
+
+    initializeTooltips();
 
 
 }
