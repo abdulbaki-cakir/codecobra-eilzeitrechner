@@ -1,0 +1,92 @@
+/* --- VALIDIERUNGS-STILE (FINALE VERSION) --- */
+
+/* 1. Roter Rahmen für JEDES invalide Input-Feld */
+.input-group input.invalid {
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+/* 2. Relative Positionierung der Eltern-Container */
+.input-group {
+    position: relative;
+}
+.radio-card-container {
+    position: relative;
+    padding-bottom: 5px; /* Etwas Platz für das Popup */
+}
+
+/* 3. Allgemeiner Stil für das Popup-Fenster */
+.validation-popup {
+    position: absolute;
+    top: 100%;
+    right: 45px;
+    margin-top: 8px;
+    z-index: 10;
+    width: auto;
+    white-space: nowrap;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 10px 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+
+    /* Standardmäßig ausgeblendet */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition:
+            opacity 0.2s ease-out,
+            transform 0.2s ease-out,
+            visibility 0.2s;
+}
+
+/* Sichtbarer Zustand (wird per JS hinzugefügt) */
+.validation-popup.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* 4. Inhalt des Popups (Icon und Text) */
+.validation-popup .fa-exclamation-triangle {
+    color: #f39c12;
+    font-size: 1.1rem;
+    margin-right: 8px;
+}
+.validation-popup span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* 5. Allgemeiner Pfeil nach oben (für alle Popups) */
+.validation-popup::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    right: 50px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: transparent transparent #fff;
+    z-index: 11;
+}
+.validation-popup::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    right: 49px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent #e0e0e0;
+    z-index: 10;
+}
+
+/* 6. Spezifische Positions-Korrektur für "Monate in Vollzeit"-Popup */
+#vollzeit-monate-error {
+    top: auto; /* Überschreibt das 'top: 100%' */
+    margin-top: 0; /* Überschreibt den margin-top */
+    bottom: -30px; /* Positioniert es unter dem Radio-Container */
+    right: 45px;
+}
