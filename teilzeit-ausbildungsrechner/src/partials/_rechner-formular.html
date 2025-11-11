@@ -22,115 +22,133 @@
 </div>
 
 <main class="calculator-form" id="step-1">
-  <h2>1. Basis Daten</h2>
-  <div class="input-group">
-    <div class="input-container-nested">
-      <div class="input-prefix">
-        <i class="fas fa-briefcase-clock"></i>Übliche Stunden pro Woche
-        (Vollzeit)
-      </div>
-      <input type="number" id="vollzeitstunden" value="40" />
-    </div>
-    <div class="info-icon-wrapper">
-      <i class="fas fa-info-circle"></i>
-      <div class="info-box">
-        Standard‑Vollzeitumfang im Beruf (meist 35–40 Std/Woche).
-      </div>
-    </div>
-  </div>
-  <div class="input-group">
-    <div class="input-container-nested">
-      <div class="input-prefix">
-        <i class="fas fa-user-clock"></i>Gewünschte Stunden pro Woche (Teilzeit)
-      </div>
-      <input type="text" id="wochenstunden" placeholder="20" />
-    </div>
-    <div class="info-icon-wrapper">
-      <i class="fas fa-info-circle"></i>
-      <div class="info-box">
-        Tatsächlicher geplanter Teilzeit‑Umfang in Stunden pro Woche.
-      </div>
-    </div>
-  </div>
-  <div class="input-group">
-    <div class="input-container-nested">
-      <div class="input-prefix">
-        <i class="fas fa-calendar-days"></i>Dauer der Ausbildung in Monate
-        (Vollzeit)
-      </div>
-      <select id="ausbildungsdauer">
-        <option value="24">24</option>
-        <option value="36" selected>36</option>
-        <option value="42">42</option>
-      </select>
-    </div>
-    <div class="info-icon-wrapper">
-      <i class="fas fa-info-circle"></i>
-      <div class="info-box">
-        Reguläre Ausbildungsdauer laut Ordnung – ohne Teilzeit/Verkürzung.
-      </div>
-    </div>
-  </div>
-  <div class="input-group radio-card-group">
-    <div class="radio-card-container">
-      <div class="radio-card-header">
-        <i class="fas fa-sync-alt"></i>
-        <h4>Wie möchtest du deine Ausbildung absolvieren?</h4>
-      </div>
-      <div class="radio-card-body">
-        <label class="radio-card-option">
-          <input type="radio" name="part-time-start-radio" value="0" checked />
-          <span class="radio-custom"></span
-          ><span class="radio-label"
-            >Ich beginne <strong>direkt in Teilzeit</strong></span
-          >
-        </label>
-        <label class="radio-card-option">
-          <input type="radio" name="part-time-start-radio" value="1" />
-          <span class="radio-custom"></span
-          ><span class="radio-label"
-            >Erst Vollzeit, <strong>später Teilzeit</strong></span
-          >
-        </label>
-      </div>
+    <h2>1. Basis Daten</h2>
 
-      <div
-        class="card-line-separator hidden"
-        id="vollzeit-monate-separator"
-      ></div>
-
-      <div class="input-container-nested hidden" id="vollzeit-monate-input">
-        <div class="input-prefix">
-          <i class="fas fa-calendar-alt"></i> Monate in Vollzeit
+    <div class="input-group">
+        <div class="input-container-nested">
+            <div class="input-prefix">
+                <i class="fas fa-briefcase-clock"></i>Übliche Stunden pro Woche
+                (Vollzeit)
+            </div>
+            <input type="number" id="vollzeitstunden" value="40" min="35" max="40" />
         </div>
-        <input
-          type="number"
-          id="vollzeit-monate"
-          placeholder="6"
-          style="width: 80px"
-        />
-      </div>
+        <div class="info-icon-wrapper">
+            <i class="fas fa-info-circle"></i>
+            <div class="info-box">
+                Standard‑Vollzeitumfang im Beruf (meist 35–40 Std/Woche).
+            </div>
+        </div>
+        <div class="validation-popup" id="vollzeitstunden-error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span></span>
+        </div>
     </div>
-    <div class="info-icon-wrapper">
-      <i class="fas fa-info-circle"></i>
-      <div class="info-box">
-        💬 Du kannst die Ausbildung in Vollzeit beginnen und später zur Teilzeit
-        wechseln. Dies kann die Genehmigung erleichtern.
-      </div>
+
+    <div class="input-group">
+        <div class="input-container-nested">
+            <div class="input-prefix">
+                <i class="fas fa-user-clock"></i>Gewünschte Stunden pro Woche (Teilzeit)
+            </div>
+            <input type="number" id="wochenstunden" placeholder="20" min="20" max="35" />
+        </div>
+        <div class="info-icon-wrapper">
+            <i class="fas fa-info-circle"></i>
+            <div class="info-box">
+                Tatsächlicher geplanter Teilzeit‑Umfang in Stunden pro Woche.
+            </div>
+        </div>
+        <div class="validation-popup" id="wochenstunden-error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span></span>
+        </div>
     </div>
-    <select
-      name="part-time-start"
-      id="part-time-start-select"
-      style="display: none"
-    >
-      <option value="0" selected>Direkt Teilzeit</option>
-      <option value="1">Wechsel später</option>
-    </select>
-  </div>
-  <div class="form-buttons">
-    <button class="secondary" disabled>Zurück</button>
-    <button class="primary" id="next-btn-1">Weiter</button>
-  </div>
+
+    <div class="input-group">
+        <div class="input-container-nested">
+            <div class="input-prefix">
+                <i class="fas fa-calendar-days"></i>Dauer der Ausbildung in Monate
+                (Vollzeit)
+            </div>
+            <select id="ausbildungsdauer">
+                <option value="24">24</option>
+                <option value="36" selected>36</option>
+                <option value="42">42</option>
+            </select>
+        </div>
+        <div class="info-icon-wrapper">
+            <i class="fas fa-info-circle"></i>
+            <div class="info-box">
+                Reguläre Ausbildungsdauer laut Ordnung – ohne Teilzeit/Verkürzung.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group radio-card-group">
+        <div class="radio-card-container">
+            <div class="radio-card-header">
+                <i class="fas fa-sync-alt"></i>
+                <h4>Wie möchtest du deine Ausbildung absolvieren?</h4>
+            </div>
+            <div class="radio-card-body">
+                <label class="radio-card-option">
+                    <input type="radio" name="part-time-start-radio" value="0" checked />
+                    <span class="radio-custom"></span
+                    ><span class="radio-label"
+                >Ich beginne <strong>direkt in Teilzeit</strong></span
+                >
+                </label>
+                <label class="radio-card-option">
+                    <input type="radio" name="part-time-start-radio" value="1" />
+                    <span class="radio-custom"></span
+                    ><span class="radio-label"
+                >Erst Vollzeit, <strong>später Teilzeit</strong></span
+                >
+                </label>
+            </div>
+
+            <div
+                    class="card-line-separator hidden"
+                    id="vollzeit-monate-separator"
+            ></div>
+
+            <div class="input-container-nested hidden" id="vollzeit-monate-input">
+                <div class="input-prefix">
+                    <i class="fas fa-calendar-alt"></i> Monate in Vollzeit
+                </div>
+                <input
+                        type="number"
+                        id="vollzeit-monate"
+                        placeholder="6"
+                        style="width: 80px"
+                        min="1"
+                />
+            </div>
+            <div class="validation-popup" id="vollzeit-monate-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span></span>
+            </div>
+        </div>
+        <div class="info-icon-wrapper">
+            <i class="fas fa-info-circle"></i>
+            <div class="info-box">
+                💬 Du kannst die Ausbildung in Vollzeit beginnen und später zur Teilzeit
+                wechseln. Dies kann die Genehmigung erleichtern.
+            </div>
+        </div>
+        <select
+                name="part-time-start"
+                id="part-time-start-select"
+                style="display: none"
+        >
+            <option value="0" selected>Direkt Teilzeit</option>
+            <option value="1">Wechsel später</option>
+        </select>
+    </div>
+
+    <div class="form-buttons">
+        <button class="secondary" disabled>Zurück</button>
+        <button class="primary" id="next-btn-1">Weiter</button>
+    </div>
 </main>
 
 <main class="calculator-form hidden" id="step-2">

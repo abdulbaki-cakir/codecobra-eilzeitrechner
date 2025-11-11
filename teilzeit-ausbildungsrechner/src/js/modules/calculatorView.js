@@ -1,8 +1,12 @@
+// --- NEUER IMPORT ---
+import { resetVollzeitMonateValidation } from "./input-validation.js";
+
 /**
  * Liest alle Eingabewerte aus dem Formular aus.
  * @returns {object} - Ein Objekt mit allen Rohwerten.
  */
 export function getFormInputs() {
+  // ... (Diese Funktion bleibt unverändert) ...
   const selections = {};
   const reasonIds = [
     "age-select",
@@ -17,13 +21,12 @@ export function getFormInputs() {
     const el = document.getElementById(id);
     if (el) selections[id] = el.value;
   });
-  // Hinweis: Diese Funktion war in beiden Versionen unvollständig und
-  // liest nur die Verkürzungsgründe aus, nicht die Basis-Daten.
 }
 /**
  * Verknüpft Radio-Buttons mit einem versteckten Select-Feld.
  */
 export const linkRadiosToSelect = (radioGroupName, selectElementId) => {
+  // ... (Diese Funktion bleibt unverändert) ...
   const radios = document.querySelectorAll(`input[name="${radioGroupName}"]`);
   const hiddenSelect = document.getElementById(selectElementId);
   if (radios.length > 0 && hiddenSelect) {
@@ -40,6 +43,7 @@ export const linkRadiosToSelect = (radioGroupName, selectElementId) => {
  * @param {number} stepNumber - Der Schritt, der angezeigt werden soll (1, 2, oder 3)
  */
 export function showStep(stepNumber) {
+  // ... (Diese Funktion bleibt unverändert) ...
   const allStepForms = [
     document.getElementById("step-1"),
     document.getElementById("step-2"),
@@ -56,7 +60,7 @@ export function showStep(stepNumber) {
 
 /**
  * Richtet das Ein-/Ausblenden des "Monate in Vollzeit"-Feldes ein.
- * (Aus V1 übernommen)
+ * (Aktualisiert, um resetVollzeitMonateValidation aufzurufen)
  */
 export const setupPartTimeSwitch = () => {
   const radios = document.querySelectorAll(
@@ -65,6 +69,7 @@ export const setupPartTimeSwitch = () => {
   const inputField = document.getElementById("vollzeit-monate-input");
   const vollzeitMonateInput = document.getElementById("vollzeit-monate");
   const separator = document.getElementById("vollzeit-monate-separator");
+
   const updateVisibility = (selectedValue) => {
     const isSwitchLater = selectedValue === "1";
     if (inputField && separator) {
@@ -80,17 +85,20 @@ export const setupPartTimeSwitch = () => {
         if (vollzeitMonateInput) {
           vollzeitMonateInput.value = "0";
         }
+
+        // --- GEÄNDERT: Ruft die importierte Reset-Funktion auf ---
+        resetVollzeitMonateValidation();
+        // --- ENDE ÄNDERUNG ---
       }
     }
   };
+
   radios.forEach((radio) => {
     radio.addEventListener("change", function () {
       updateVisibility(this.value);
     });
-    if (radio.checked) {
-      updateVisibility(radio.value);
-    }
   });
+
   const initialCheckedRadio = document.querySelector(
     'input[name="part-time-start-radio"]:checked',
   );
@@ -101,10 +109,9 @@ export const setupPartTimeSwitch = () => {
 
 /**
  * Aktualisiert die Fortschrittsanzeige (Punkte und Linie).
- * (Aus V2 übernommen)
- * @param {number} currentStep - Der aktuell aktive Schritt
  */
 function updateProgress(currentStep) {
+  // ... (Diese Funktion bleibt unverändert) ...
   const progressLine = document.getElementById("progress-line");
   const progressSteps = document.querySelectorAll(".progress-container .step");
 
@@ -115,7 +122,7 @@ function updateProgress(currentStep) {
 
   let progressPercentage = 0;
   if (currentStep === 1) {
-    progressPercentage = 20; // Startet nicht bei 0, um "aktiv" zu wirken
+    progressPercentage = 20;
   } else if (currentStep === 2) {
     progressPercentage = 50;
   } else {
