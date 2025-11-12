@@ -112,4 +112,25 @@
         right: 20px; /* Spannt das Popup über die verfügbare Breite auf */
         width: auto; /* Passt die Breite automatisch an */
 
-/* Erlaube Textumbruch auf Handy */
+        /* Erlaube Textumbruch auf Handy */
+        white-space: normal;
+    }
+
+    /* Pfeil-Position für Handy anpassen (links statt rechts) */
+    .validation-popup::before {
+        left: 30px;
+        right: auto; /* Hebt die 'right'-Regel auf */
+    }
+    .validation-popup::after {
+        left: 29px;
+        right: auto; /* Hebt die 'right'-Regel auf */
+    }
+
+    /* Sicherstellen, dass die spezifischen Popups auch links ausgerichtet sind */
+    #vollzeitstunden-error,
+    #wochenstunden-error,
+    #vollzeit-monate-error {
+        left: 20px;
+        right: 20px;
+    }
+}
