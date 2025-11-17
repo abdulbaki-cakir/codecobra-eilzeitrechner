@@ -1,8 +1,10 @@
 stages:
   - build
   - test
+  - deploy-dockerhub
 
-# Vorlage für alle Jobs: Caching und Installation
+# --- VORLAGE FÜR NODE-JOBS ---
+
 .setup-template: &setup
   image: node:20-alpine
   cache:
@@ -15,8 +17,8 @@ stages:
     - cd teilzeit-ausbildungsrechner
     - npm install
 
-# 1. Job: BUILD (aus der 'build'-Stage)
-# Wird zuerst ausgeführt
+# --- STAGE: BUILD ---
+
 build-job:
   <<: *setup
   stage: build
@@ -25,28 +27,62 @@ build-job:
     - npm run build
   artifacts:
     paths:
+      # KORRIGIERTER PFAD:
       - teilzeit-ausbildungsrechner/dist/
 
-# 2. Jobs: LINTER (alle aus der 'test'-Stage)
-# Diese 3 Jobs laufen jetzt parallel, nachdem 'build-job' erfolgreich war.
+# --- STAGE: TEST ---
 
 lint-html-job:
   <<: *setup
   stage: test
   script:
-    - echo "Checking HTML..."
-    - npm run lint:html # Führt nur 'htmlhint .' aus
+    - npm run lint:html
 
 lint-css-job:
   <<: *setup
   stage: test
   script:
-    - echo "Checking CSS..."
-    - npm run lint:css # Führt nur 'stylelint "**/*.css"' aus
+    - npm run lint:css
 
 lint-js-job:
   <<: *setup
   stage: test
   script:
-    - echo "Checking JavaScript..."
-    - npm run lint:js # Führt nur 'eslint .' aus
+    - npm run lint:js
+
+# --- STAGE: DOCKERHUB ---
+
+deploy-job:
+  stage: deploy-dockerhub
+
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+
+  dependencies:
+    - build-job
+
+  before_script:
+    - mv teilzeit-ausbildungsrechner/dist ./dist
+    - echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"username\":\"$DOCKERHUB_USER\",\"password\":\"$DOCKERHUB_TOKEN\"}}}" > /kaniko/.docker/config.json
+
+  script:
+    - |
+      echo "--- Preparing Kaniko Tags for Docker Hub ---"
+      
+      IMAGE_NAME="$DOCKERHUB_USER/codecobra-docker"
+      
+      echo "Full Image Name: $IMAGE_NAME"
+
+      IMAGE_TAG_ARGS="--destination $IMAGE_NAME:$CI_COMMIT_SHORT_SHA"
+      LATEST_TAG_ARGS="--destination $IMAGE_NAME:latest"
+
+      echo "--- Running Kaniko Executor ---"
+      /kaniko/executor \
+        --context $CI_PROJECT_DIR \
+        --dockerfile $CI_PROJECT_DIR/Dockerfile \
+        $IMAGE_TAG_ARGS \
+        $LATEST_TAG_ARGS
+
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
