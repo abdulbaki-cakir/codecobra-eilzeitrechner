@@ -214,10 +214,8 @@ export function renderResults(data) {
       const p = document.createElement("p");
       p.classList.add("detailed-shortening-item");
 
-      // FIX 3: === statt ==
       // Fallunterscheidung: 0 Monate vs. echte Verkürzung
       if (detail.months === 0) {
-        // ÄNDERUNG: Hier steht jetzt nur noch "0 Monate Verkürzung"
         p.innerHTML = `${detail.reason}: <strong>0 Monate Verkürzung</strong>`;
         p.style.color = "#555";
       } else {
