@@ -37,7 +37,7 @@ Da der Container mit einem festen Namen (`CodeCobra-TZR`) läuft, muss er gestop
 docker pull abcakir/codecobra-docker:latest
 ```
 
-### 2. Alten Container stoppen und löschen
+### 2. Alten Container stoppen
 ```bash
 docker stop CodeCobra-TZR
 ```
