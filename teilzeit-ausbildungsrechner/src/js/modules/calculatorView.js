@@ -237,7 +237,7 @@ export function renderResults(data) {
     const capMessage = document.createElement("p");
     capMessage.classList.add("cap-message");
     capMessage.innerHTML =
-      "<strong>Hinweis: Maximal zulässige Verkürzung erreicht.</strong>";
+      "<i><strong>Hinweis: Maximal zulässige Verkürzung erreicht.</strong></i>";
     detailedShorteningsDiv.appendChild(capMessage);
   }
 
