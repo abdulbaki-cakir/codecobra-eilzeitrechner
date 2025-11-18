@@ -755,14 +755,14 @@
 }
 
 .cap-message-error {
-    margin-top: 15px;
-    padding: 10px 15px;
-    border-top: none;
-    font-style: italic;
-    font-weight: bold;
-    border: 2px solid #a50000;
-    background-color: #ffe6e6;
-    border-radius: 8px;
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-top: none;
+  font-style: italic;
+  font-weight: bold;
+  border: 2px solid #a50000;
+  background-color: #ffe6e6;
+  border-radius: 8px;
 }
 
 /* * NEUER STIL FÜR DIE DURCHSCHNITTS-STUNDEN-BOX
