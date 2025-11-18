@@ -524,11 +524,6 @@ input[type="radio"]:disabled
         padding-left: 10px;
     }
 }
-#calculator-section .info-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 8px; border-style: solid; border-color: #1a1a1a transparent transparent transparent; }
-#calculator-section .form-buttons { display: flex; justify-content: center; gap: 1rem; margin-top: 3rem; }
-#calculator-section button { padding: 0.8rem 2rem; border-radius: 8px; border: 1px solid #000; font-size: 1rem; cursor: pointer; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
-#calculator-section button.primary { background-color: #000; color: white; }
-
 
 /* Stile für die detaillierte Verkürzungsanzeige */
 .result-item-group {
