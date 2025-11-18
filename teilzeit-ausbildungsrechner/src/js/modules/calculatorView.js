@@ -191,14 +191,14 @@ export function renderResults(data) {
       'input[name="school-finish-radio"]:checked',
     );
 
-    if (selectedRadio && selectedRadio.value == "0") {
+    if (selectedRadio && selectedRadio.value === "0") {
       // Text des Labels holen
       const labelSpan = selectedRadio
         .closest(".radio-card-option")
         .querySelector(".radio-label");
       const reasonText = labelSpan ? labelSpan.textContent.trim() : "";
 
-      if (reasonText == "Hauptschulabschluss") {
+      if (reasonText === "Hauptschulabschluss") {
         shorteningResult.details.unshift({
           reason: reasonText,
           months: 0,
@@ -214,6 +214,7 @@ export function renderResults(data) {
       const p = document.createElement("p");
       p.classList.add("detailed-shortening-item");
 
+      // FIX 3: === statt ==
       // Fallunterscheidung: 0 Monate vs. echte Verkürzung
       if (detail.months === 0) {
         // ÄNDERUNG: Hier steht jetzt nur noch "0 Monate Verkürzung"
