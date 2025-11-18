@@ -158,7 +158,7 @@ export function renderResults(data) {
         servedTimeDetailsDiv.appendChild(noteElement);
       }
       noteElement.innerHTML =
-        "<strong>Hinweis: Dies ist keine Verkürzung, sondern geleistete Zeit.</strong>";
+        "<i><strong>Hinweis: Dies ist keine Verkürzung, sondern geleistete Zeit.</strong></i>";
       noteElement.style.display = "block";
     } else {
       servedTimeCard.style.display = "none";
@@ -237,7 +237,7 @@ export function renderResults(data) {
     const capMessage = document.createElement("p");
     capMessage.classList.add("cap-message");
     capMessage.innerHTML =
-      "<strong>Hinweis: Maximal zulässige Verkürzung erreicht.</strong>";
+      "<i><strong>Hinweis: Maximal zulässige Verkürzung erreicht.</strong></i>";
     detailedShorteningsDiv.appendChild(capMessage);
   }
 
