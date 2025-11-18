@@ -754,15 +754,15 @@
   font-style: italic;
 }
 
-.cap-message--error {
-  margin-top: 15px;
-  padding: 10px 15px;
-  border-top: none;
-  font-style: italic;
-  font-weight: bold;
-  border: 2px solid #a50000;
-  background-color: #ffe6e6;
-  border-radius: 8px;
+.cap-message-error {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border-top: none;
+    font-style: italic;
+    font-weight: bold;
+    border: 2px solid #a50000;
+    background-color: #ffe6e6;
+    border-radius: 8px;
 }
 
 /* * NEUER STIL FÜR DIE DURCHSCHNITTS-STUNDEN-BOX
@@ -771,7 +771,7 @@
   display: flex;
   align-items: center;
   background-color: #1a1a1a;
-  color: #ffffff;
+  color: #fff;
   padding: 16px 20px;
   border-radius: 8px;
   margin-top: 20px;
@@ -786,7 +786,7 @@
 
 .result-card-info-box i {
   font-size: 1.8em;
-  color: #ffffff;
+  color: #fff;
   margin-right: 18px;
   width: 30px;
   text-align: center;
@@ -802,6 +802,6 @@
 }
 
 .result-card-info-box .info-box-text strong {
-  color: #ffffff;
+  color: #fff;
   font-weight: 700;
 }
