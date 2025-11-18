@@ -28,14 +28,26 @@ docker run -d -p 8080:80 --name CodeCobra-TZR abcakir/codecobra-docker:latest
 
 - Öffne deinen Browser und gehe auf: http://localhost:8080
 
-## Container stoppen
+#### 🔄 Container aktualisieren (Update)
 
+Da der Container mit einem festen Namen (`CodeCobra-TZR`) läuft, muss er gestoppt und neu erstellt werden, um das neueste Image von Docker Hub zu verwenden.
+
+### 1. Das neueste Image herunterladen (Pull)
+```bash
+docker pull abcakir/codecobra-docker:latest
+```
+
+### 2. Alten Container stoppen und löschen
 ```bash
 docker stop CodeCobra-TZR
 ```
-## Container löschen
+### 3. Alten Container löschen
 ```bash
 docker rm CodeCobra-TZR
+```
+### 4. Neuen Container mit dem neuen Image starten
+```bash
+docker run -d -p 8080:80 --name CodeCobra-TZR abcakir/codecobra-docker:latest
 ```
 
 
