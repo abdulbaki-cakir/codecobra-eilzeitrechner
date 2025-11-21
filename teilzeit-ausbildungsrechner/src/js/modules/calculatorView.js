@@ -125,9 +125,12 @@ export function renderResults(data) {
     shorteningResult,
     officialShorteningMonths,
     capWasHitShortening,
+    newFullTimeDuration,
+    legalMinimumDuration,
     remainingFullTimeEquivalent,
     finalExtensionMonths,
     finalTotalDuration,
+    extensionCapWasHit,
     gracePeriod,
   } = data;
 
@@ -249,6 +252,20 @@ export function renderResults(data) {
   } else {
       partTimeDetailsDiv.innerHTML = `<p class="detailed-part-time-item">Die Reduzierung der wöchentlichen Arbeitszeit von <strong>${fullTimeHours.toFixed(1)}h</strong> auf <strong>${partTimeHours.toFixed(1)}h</strong> für die verbleibende Dauer führt zu einer Verlängerung <strong>um ${finalExtensionMonths} Monate</strong>.</p>`;
   }
+
+  if (extensionCapWasHit) {
+    const capMessage = document.createElement('p');
+    capMessage.classList.add('cap-message--error');
+    capMessage.innerHTML = '<strong style="color: #A50000;">⚠️ Achtung: Die Gesamtdauer darf höchstens um die Hälfte der Regelausbildungszeit verlängert werden. Lösung: Erhöhe die wöchentliche Teilzeit-Arbeitszeit.</strong>';
+
+    if (partTimeCardLeft) partTimeCardLeft.style.backgroundColor = '#f05670';
+    if (finalResultBox) finalResultBox.style.backgroundColor = '#f05670';
+
+    } else {
+        if (partTimeCardLeft) partTimeCardLeft.style.backgroundColor = '#1a1a1a'; 
+        if (finalResultBox) finalResultBox.style.backgroundColor = '#000'; 
+    }
+    
     document.getElementById("final-duration-result").textContent = `${finalTotalDuration} Monate`;
   } else {
     partTimeCard.style.display = "none";
@@ -260,72 +277,72 @@ export function renderResults(data) {
 
   }
   // 5. Box für Durchschnittliche Arbeitszeit pro Tag
-   const resultsContainer = document.querySelector('.results-container');
-const existingBox = document.getElementById('average-hours-box');
+  const resultsContainer = document.querySelector('.results-container');
+  const existingBox = document.getElementById('average-hours-box');
 
-if (existingBox) existingBox.remove();
+  if (existingBox) existingBox.remove();
 
-if (partTimeHoursAvailable) {
-    const averageBox = document.createElement('div');
-    averageBox.id = 'average-hours-box';
-    averageBox.classList.add('result-card-info-box');
+  if (partTimeHoursAvailable && !extensionCapWasHit) {
+      const averageBox = document.createElement('div');
+      averageBox.id = 'average-hours-box';
+      averageBox.classList.add('result-card-info-box');
 
-    const icon = document.createElement('img');
-    icon.src = './src/assets/icons/user-time.svg';
-    icon.alt = 'Info Icon';
-    icon.classList.add('info-icon');
+      const icon = document.createElement('img');
+      icon.src = './src/assets/icons/user-time.svg';
+      icon.alt = 'Info Icon';
+      icon.classList.add('info-icon');
 
-    const textBox = document.createElement('div');
-    textBox.classList.add('info-box-text');
+      const textBox = document.createElement('div');
+      textBox.classList.add('info-box-text');
 
-    const avgFtText = document.createElement('p');
-    const avgPtText = document.createElement('p');
+      const avgFtText = document.createElement('p');
+      const avgPtText = document.createElement('p');
 
-    const avgFtDaily = (fullTimeHours / 5).toFixed(1).replace('.', ',');
-    const avgPtDaily = (partTimeHours / 5).toFixed(1).replace('.', ',');
+      const avgFtDaily = (fullTimeHours / 5).toFixed(1).replace('.', ',');
+      const avgPtDaily = (partTimeHours / 5).toFixed(1).replace('.', ',');
 
-    avgFtText.innerHTML = 
-        `Durchschnittliche Arbeitszeit pro Tag (Vollzeit): <strong>${avgFtDaily} Stunden</strong>`;
-    avgPtText.innerHTML = 
-        `Durchschnittliche Arbeitszeit pro Tag (Teilzeit): <strong>${avgPtDaily} Stunden</strong>`;
+      avgFtText.innerHTML = 
+          `Durchschnittliche Arbeitszeit pro Tag (Vollzeit): <strong>${avgFtDaily} Stunden</strong>`;
+      avgPtText.innerHTML = 
+          `Durchschnittliche Arbeitszeit pro Tag (Teilzeit): <strong>${avgPtDaily} Stunden</strong>`;
 
-    textBox.appendChild(avgFtText);
-    textBox.appendChild(avgPtText);
+      textBox.appendChild(avgFtText);
+      textBox.appendChild(avgPtText);
 
-    averageBox.appendChild(icon);
-    averageBox.appendChild(textBox);
+      averageBox.appendChild(icon);
+      averageBox.appendChild(textBox);
 
-    if (resultsContainer) {
-        resultsContainer.appendChild(averageBox);
-    }
-}
-  // 6. Box für Vorzeitige Zulassung
-  const existingEarlyBox = document.getElementById("early-admission-box");
-  if (existingEarlyBox) existingEarlyBox.remove();
-
-  
-        const earlyAdmissionBox = document.createElement('div');
-        earlyAdmissionBox.id = 'early-admission-box';
-        earlyAdmissionBox.classList.add('result-card-info-box');
-
-       const icon = document.createElement('img');
-       icon.src = './src/assets/icons/information.svg';
-       icon.alt = 'Info Icon';
-       icon.classList.add('info-icon');
-
-        const earlyTextBox = document.createElement('div');
-        earlyTextBox.classList.add('info-box-text');
-
-        const earlyInfoText = document.createElement('p');
-        // Der Text, den wir besprochen haben:
-        earlyInfoText.innerHTML = '<strong>Hinweis zur vorzeitigen Zulassung:</strong><br>Eine zusätzliche Verkürzung (z.B. um 6 Monate) ist oft bei sehr guten Leistungen <i>während</i> der Ausbildung möglich. Diese wird bei der zuständigen Stelle (z.B. IHK/HWK) beantragt und ist unabhängig von den hier berechneten Gründen.';
-
-        earlyTextBox.appendChild(earlyInfoText);
-        earlyAdmissionBox.appendChild(icon);
-        earlyAdmissionBox.appendChild(earlyTextBox);
-  
-
-  if (resultsContainer) {
-     resultsContainer.appendChild(earlyAdmissionBox);
+      if (resultsContainer) {
+          resultsContainer.appendChild(averageBox);
+      }
   }
-}
+    // 6. Box für Vorzeitige Zulassung
+    const existingEarlyBox = document.getElementById("early-admission-box");
+    if (existingEarlyBox) existingEarlyBox.remove();
+
+    if (newFullTimeDuration > legalMinimumDuration) {
+      const earlyAdmissionBox = document.createElement('div');
+      earlyAdmissionBox.id = 'early-admission-box';
+      earlyAdmissionBox.classList.add('result-card-info-box');
+
+      const icon = document.createElement('img');
+      icon.src = './src/assets/icons/information.svg';
+      icon.alt = 'Info Icon';
+      icon.classList.add('info-icon');
+
+      const earlyTextBox = document.createElement('div');
+      earlyTextBox.classList.add('info-box-text');
+      
+      const earlyInfoText = document.createElement('p');
+          
+      earlyInfoText.innerHTML = '<strong>Hinweis zur vorzeitigen Zulassung:</strong><br>Eine zusätzliche Verkürzung (z.B. um 6 Monate) ist oft bei sehr guten Leistungen <i>während</i> der Ausbildung möglich. Diese wird bei der zuständigen Stelle (z.B. IHK/HWK) beantragt und ist unabhängig von den hier berechneten Gründen.';
+
+      earlyTextBox.appendChild(earlyInfoText);
+      earlyAdmissionBox.appendChild(icon);
+      earlyAdmissionBox.appendChild(earlyTextBox)
+      
+      if (resultsContainer) {
+      resultsContainer.appendChild(earlyAdmissionBox);
+      }
+    }
+  }
