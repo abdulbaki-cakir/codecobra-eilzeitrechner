@@ -822,3 +822,16 @@
   color: #fff;
   font-weight: 700;
 }
+#average-hours-box img.info-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  opacity: 1;
+  filter: brightness(0) invert(1);
+}
+#early-admission-box img.info-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  opacity: 1;
+}
