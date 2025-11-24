@@ -133,7 +133,6 @@ export function renderResults(data) {
     shorteningResult,
     officialShorteningMonths,
     capWasHitShortening,
-    newFullTimeDuration,
     legalMinimumDuration,
     remainingFullTimeEquivalent,
     finalExtensionMonths,
