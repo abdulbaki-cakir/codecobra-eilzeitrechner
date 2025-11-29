@@ -375,18 +375,18 @@ export function renderResults(data) {
     }
   }
 
-  //BALKENDIAGRAMM
+  // BALKENDIAGRAMM
 
   const canvas = document.getElementById("results-chart");
 
   if (canvas) {
-    if (typeof Chart !== "undefined") {
+    if (typeof window.Chart !== "undefined") {
       try {
         const ctx = canvas.getContext("2d");
 
         if (myResultsChart) myResultsChart.destroy();
 
-        myResultsChart = new Chart(ctx, {
+        myResultsChart = new window.Chart(ctx, {
           type: "bar",
           data: {
             labels: [
