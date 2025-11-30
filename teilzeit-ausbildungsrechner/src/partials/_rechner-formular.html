@@ -9,31 +9,19 @@
   <div class="progress-line-fill" id="progress-line"></div>
   <div class="step active" data-step="1">
     <span class="icon-step" aria-hidden="true">
-      <img
-        src="/src/assets/icons/house.svg"
-        alt=""
-        class="icon"
-      />
+      <img src="/src/assets/icons/house.svg" alt="" class="icon" />
     </span>
     <p>Start</p>
   </div>
   <div class="step" data-step="2">
     <span class="icon-step" aria-hidden="true">
-      <img
-        src="/src/assets/icons/settings-sliders.svg"
-        alt=""
-        class="icon"
-      />
+      <img src="/src/assets/icons/settings-sliders.svg" alt="" class="icon" />
     </span>
     <p>Dauer anpassen</p>
   </div>
   <div class="step" data-step="3">
     <span class="icon-step" aria-hidden="true">
-      <img
-        src="/src/assets/icons/chat-arrow-grow.svg"
-        alt=""
-        class="icon"
-      />
+      <img src="/src/assets/icons/chat-arrow-grow.svg" alt="" class="icon" />
     </span>
     <p>Ergebnisse</p>
   </div>
@@ -45,19 +33,38 @@
   <div class="input-group">
     <div class="input-container-nested">
       <div class="input-prefix">
-        <img src="/src/assets/icons/business-time.svg" alt="" class="icon icon-inline" />Übliche Stunden pro Woche
-        (Vollzeit)
+        <img
+          src="/src/assets/icons/business-time.svg"
+          alt=""
+          class="icon icon-inline"
+        />Übliche Stunden pro Woche (Vollzeit)
       </div>
-      <input type="number" id="vollzeitstunden" value="40" min="35" max="40" />
+      <input
+        type="number"
+        id="vollzeitstunden"
+        placeholder="40"
+        min="35"
+        max="40"
+        step="0.5"
+      />
     </div>
     <div class="info-icon-wrapper">
-      <img src="/src/assets/icons/information.svg" alt="" class="icon info-icon" />
+      <img
+        src="/src/assets/icons/information.svg"
+        alt=""
+        class="icon info-icon"
+      />
       <div class="info-box">
-        Standard‑Vollzeitumfang im Beruf (meist 35–40 Std/Woche).
+        💬 Wie viele Stunden pro Woche wird in Ihrem Unternehmen gearbeitet,
+        wenn man vollzeitbeschäftigt ist?.
       </div>
     </div>
     <div class="validation-popup" id="vollzeitstunden-error">
-      <img src="/src/assets/icons/time-quarter-to.svg" alt="" class="icon icon-warning" />
+      <img
+        src="/src/assets/icons/time-quarter-to.svg"
+        alt=""
+        class="icon icon-warning"
+      />
       <span></span>
     </div>
   </div>
@@ -65,7 +72,11 @@
   <div class="input-group">
     <div class="input-container-nested">
       <div class="input-prefix">
-        <img src="/src/assets/icons/user-time.svg" alt="" class="icon icon-inline" />Gewünschte Stunden pro Woche (Teilzeit)
+        <img
+          src="/src/assets/icons/user-time.svg"
+          alt=""
+          class="icon icon-inline"
+        />Gewünschte Stunden pro Woche (Teilzeit)
       </div>
       <input
         type="number"
@@ -73,16 +84,26 @@
         placeholder="20"
         min="20"
         max="35"
+        step="0.5"
       />
     </div>
     <div class="info-icon-wrapper">
-      <img src="/src/assets/icons/information.svg" alt="" class="icon info-icon" />
+      <img
+        src="/src/assets/icons/information.svg"
+        alt=""
+        class="icon info-icon"
+      />
       <div class="info-box">
-        Tatsächlicher geplanter Teilzeit‑Umfang in Stunden pro Woche.
+        💬 Wie viele Stunden pro Woche möchten Sie während Ihrer
+        Teilzeitausbildung arbeiten?
       </div>
     </div>
     <div class="validation-popup" id="wochenstunden-error">
-      <img src="/src/assets/icons/time-quarter-to.svg" alt="" class="icon icon-warning" />
+      <img
+        src="/src/assets/icons/time-quarter-to.svg"
+        alt=""
+        class="icon icon-warning"
+      />
       <span></span>
     </div>
   </div>
@@ -90,8 +111,11 @@
   <div class="input-group">
     <div class="input-container-nested">
       <div class="input-prefix">
-        <img src="/src/assets/icons/calendar.svg" alt="" class="icon icon-inline" />Dauer der Ausbildung in Monate
-        (Vollzeit)
+        <img
+          src="/src/assets/icons/calendar.svg"
+          alt=""
+          class="icon icon-inline"
+        />Dauer der Ausbildung in Monate (Vollzeit)
       </div>
       <select id="ausbildungsdauer">
         <option value="24">24</option>
@@ -100,9 +124,13 @@
       </select>
     </div>
     <div class="info-icon-wrapper">
-      <img src="/src/assets/icons/information.svg" alt="" class="icon info-icon" />
+      <img
+        src="/src/assets/icons/information.svg"
+        alt=""
+        class="icon info-icon"
+      />
       <div class="info-box">
-        Reguläre Ausbildungsdauer laut Ordnung – ohne Teilzeit/Verkürzung.
+        💬 Wie viele Monate dauert Ihre Ausbildung insgesamt normalerweise?
       </div>
     </div>
   </div>
@@ -110,7 +138,11 @@
   <div class="input-group radio-card-group">
     <div class="radio-card-container">
       <div class="radio-card-header">
-        <img src="/src/assets/icons/tools.svg" alt="" class="icon icon-inline" />
+        <img
+          src="/src/assets/icons/time-quarter-to.svg"
+          alt=""
+          class="icon icon-inline"
+        />
         <h4>Wie möchtest du deine Ausbildung absolvieren?</h4>
       </div>
       <div class="radio-card-body">
@@ -137,7 +169,12 @@
 
       <div class="input-container-nested hidden" id="vollzeit-monate-input">
         <div class="input-prefix">
-          <img src="/src/assets/icons/calendar.svg" alt="" class="icon icon-inline" /> Monate in Vollzeit
+          <img
+            src="/src/assets/icons/calendar.svg"
+            alt=""
+            class="icon icon-inline"
+          />
+          Monate in Vollzeit
         </div>
         <input
           type="number"
@@ -148,15 +185,23 @@
         />
       </div>
       <div class="validation-popup" id="vollzeit-monate-error">
-        <img src="/src/assets/icons/time-quarter-to.svg" alt="" class="icon icon-warning" />
+        <img
+          src="/src/assets/icons/time-quarter-to.svg"
+          alt=""
+          class="icon icon-warning"
+        />
         <span></span>
       </div>
     </div>
     <div class="info-icon-wrapper">
-      <img src="/src/assets/icons/information.svg" alt="" class="icon info-icon" />
+      <img
+        src="/src/assets/icons/information.svg"
+        alt=""
+        class="icon info-icon"
+      />
       <div class="info-box">
-        💬 Du kannst die Ausbildung in Vollzeit beginnen und später zur Teilzeit
-        wechseln. Dies kann die Genehmigung erleichtern.
+        💬 Wie viele Monate in Vollzeit möchten sie zuerst absolvieren bzw.
+        haben Sie bereits hinter sich?
       </div>
     </div>
     <select
@@ -181,7 +226,11 @@
   <div class="input-group radio-card-group">
     <div class="radio-card-container">
       <div class="radio-card-header">
-        <img src="/src/assets/icons/cake-birthday.svg" alt="" class="icon icon-inline" />
+        <img
+          src="/src/assets/icons/cake-birthday.svg"
+          alt=""
+          class="icon icon-inline"
+        />
         <h4>Bist du älter als 21?</h4>
       </div>
       <div class="radio-card-body">
@@ -197,10 +246,14 @@
       </div>
     </div>
     <div class="info-icon-wrapper">
-      <img src="/src/assets/icons/information.svg" alt="" class="icon info-icon" />
+      <img
+        src="/src/assets/icons/information.svg"
+        alt=""
+        class="icon info-icon"
+      />
       <div class="info-box">
-        Ab 21 kann eine Verkürzung möglich sein; maßgeblich ist das Alter zu
-        Ausbildungsbeginn.
+        💬 Eine Verkürzung ist möglich, wenn Sie zu Beginn der Ausbildung über
+        21 Jahre alt sind.
       </div>
     </div>
     <select name="age" id="age-select" style="display: none">
@@ -212,7 +265,11 @@
   <div class="input-group radio-card-group">
     <div class="radio-card-container">
       <div class="radio-card-header">
-        <img src="/src/assets/icons/graduation-cap.svg" alt="" class="icon icon-inline" />
+        <img
+          src="/src/assets/icons/school.svg"
+          alt=""
+          class="icon icon-inline"
+        />
         <h4>Was ist dein höchster Schulabschluss?</h4>
       </div>
       <div class="radio-card-body">
@@ -239,9 +296,13 @@
       </div>
     </div>
     <div class="info-icon-wrapper">
-      <img src="/src/assets/icons/information.svg" alt="" class="icon info-icon" />
+      <img
+        src="/src/assets/icons/information.svg"
+        alt=""
+        class="icon info-icon"
+      />
       <div class="info-box">
-        Höhere Abschlüsse können eine Verkürzung ermöglichen – wähle deinen
+        💬 Höhere Abschlüsse können eine Verkürzung ermöglichen – wähle deinen
         höchsten Abschluss.
       </div>
     </div>
@@ -255,7 +316,11 @@
   <div class="input-group radio-card-group">
     <div class="radio-card-container">
       <div class="radio-card-header">
-        <img src="/src/assets/icons/corporate-alt.svg" alt="" class="icon icon-inline" />
+        <img
+          src="/src/assets/icons/corporate-alt.svg"
+          alt=""
+          class="icon icon-inline"
+        />
         <h4>
           Hast du schon erste relevante Berufserfahrungen gesammelt (z. B. in
           einem Praktikum)?
@@ -274,9 +339,14 @@
       </div>
     </div>
     <div class="info-icon-wrapper">
-      <img src="/src/assets/icons/information.svg" alt="" class="icon info-icon" />
+      <img
+        src="/src/assets/icons/information.svg"
+        alt=""
+        class="icon info-icon"
+      />
       <div class="info-box">
-        Einschlägige Praxis (z. B. Praktikum) kann ggf. angerechnet werden.
+        💬 Praktische Erfahrungen, z. B. aus Praktika, können auf die
+        Ausbildungszeit angerechnet werden.
       </div>
     </div>
     <select name="experience" id="experience-select" style="display: none">
@@ -288,7 +358,11 @@
   <div class="input-group radio-card-group">
     <div class="radio-card-container">
       <div class="radio-card-header">
-        <img src="/src/assets/icons/book-alt.svg" alt="" class="icon icon-inline" />
+        <img
+          src="/src/assets/icons/tools.svg"
+          alt=""
+          class="icon icon-inline"
+        />
         <h4>Hast du bereits eine Ausbildung abgeschlossen?</h4>
       </div>
       <div class="radio-card-body">
@@ -304,9 +378,13 @@
       </div>
     </div>
     <div class="info-icon-wrapper">
-      <img src="/src/assets/icons/information.svg" alt="" class="icon info-icon" />
+      <img
+        src="/src/assets/icons/information.svg"
+        alt=""
+        class="icon info-icon"
+      />
       <div class="info-box">
-        Eine passende, abgeschlossene Ausbildung kann die Dauer deutlich
+        💬 Eine passende, abgeschlossene Ausbildung kann die Dauer deutlich
         reduzieren.
       </div>
     </div>
@@ -323,8 +401,14 @@
   <div class="input-group radio-card-group">
     <div class="radio-card-container">
       <div class="radio-card-header">
-        <img src="/src/assets/icons/school.svg" alt="" class="icon icon-inline" />
-        <h4>Hast du passende Fächer im Studium belegt?</h4>
+        <img
+          src="/src/assets/icons/graduation-cap.svg"
+          alt=""
+          class="icon icon-inline"
+        />
+        <h4>
+          Hast du im Studium Kurse belegt, die für die Ausbildung relevant sind?
+        </h4>
       </div>
       <div class="radio-card-body">
         <label class="radio-card-option">
@@ -339,10 +423,15 @@
       </div>
     </div>
     <div class="info-icon-wrapper">
-      <img src="/src/assets/icons/information.svg" alt="" class="icon info-icon" />
+      <img
+        src="/src/assets/icons/information.svg"
+        alt=""
+        class="icon info-icon"
+      />
       <div class="info-box">
-        Anerkannte, einschlägige Studienleistungen können auf die Ausbildung
-        angerechnet werden.
+        💬 Beispiel: Informatik-Kurse, wie z. B. Programmierung oder
+        Webentwicklung können für die Fachinformatiker-Ausbildung anerkannt
+        werden.
       </div>
     </div>
     <select name="study" id="study-select" style="display: none">
@@ -354,8 +443,12 @@
   <div class="input-group radio-card-group">
     <div class="radio-card-container">
       <div class="radio-card-header">
-        <img src="/src/assets/icons/child.svg" alt="" class="icon icon-inline" />
-        <h4>Hast du Kinder?</h4>
+        <img
+          src="/src/assets/icons/child.svg"
+          alt=""
+          class="icon icon-inline"
+        />
+        <h4>Hast du Kinder, um die du dich kümmerst?</h4>
       </div>
       <div class="radio-card-body">
         <label class="radio-card-option">
@@ -370,10 +463,14 @@
       </div>
     </div>
     <div class="info-icon-wrapper">
-      <img src="/src/assets/icons/information.svg" alt="" class="icon info-icon" />
+      <img
+        src="/src/assets/icons/information.svg"
+        alt=""
+        class="icon info-icon"
+      />
       <div class="info-box">
-        Elternschaft kann Teilzeit erleichtern; prüfe ggf. Anrechnung/Regelungen
-        mit Betrieb/Kammer.
+        💬 Elternschaft oder die Betreuung von Kindern kann die Ausbildung unter
+        Umständen verkürzen.
       </div>
     </div>
     <select name="child-care" id="child-care-select" style="display: none">
@@ -385,8 +482,12 @@
   <div class="input-group radio-card-group">
     <div class="radio-card-container">
       <div class="radio-card-header">
-        <img src="/src/assets/icons/old-people.svg" alt="" class="icon icon-inline" />
-        <h4>Pflegst du Angehörige?</h4>
+        <img
+          src="/src/assets/icons/old-people.svg"
+          alt=""
+          class="icon icon-inline"
+        />
+        <h4>Pflegst du Angehörige (z. B. deine Großeltern)?</h4>
       </div>
       <div class="radio-card-body">
         <label class="radio-card-option">
@@ -401,10 +502,15 @@
       </div>
     </div>
     <div class="info-icon-wrapper">
-      <img src="/src/assets/icons/information.svg" alt="" class="icon info-icon" />
+      <img
+        src="/src/assets/icons/information.svg"
+        alt=""
+        class="icon info-icon"
+      />
       <div class="info-box">
-        Pflege kann Teilzeit/Anrechnung begründen; Details mit der zuständigen
-        Kammer klären.
+        💬 Als Angehörige gelten Personen, die auf Pflege oder Unterstützung
+        angewiesen sind, z. B. ältere Menschen, Menschen mit Behinderung oder
+        sonst hilfsbedürftige Personen.
       </div>
     </div>
     <select name="family-care" id="family-care-select" style="display: none">
@@ -499,6 +605,9 @@
       </div>
     </div>
 
+    <div class="chart-container">
+      <canvas id="results-chart"></canvas>
+    </div>
     <div class="final-result-box">
       <span class="result-label">Gesamtausbildungsdauer ab Beginn</span>
       <span class="result-value" id="final-duration-result">-- Monate</span>
@@ -506,19 +615,17 @@
   </div>
 
   <p class="disclaimer">
-    <strong>Bitte beachten Sie:</strong> Die Ergebnisse dieses Rechners sind
-    unverbindlich und dienen lediglich als Orientierung. Ein Rechtsanspruch kann
-    daraus nicht abgeleitet werden.<br /><br />
-    Auch bei der Kombination mehrerer Gründe darf die gesetzliche
-    Mindestausbildungsdauer nicht unterschritten werden. Eine detaillierte
-    Erklärung zur Berechnung finden Sie auf unserer Seite
+    <strong>Bitte beachten Sie:</strong> Die Ergebnisse dienen lediglich zur
+    Orientierung und begründen keinen Rechtsanspruch.<br /><br />
+    Eine detaillierte Erklärung zur Berechnung finden Sie auf unserer Seite
     <a href="how-it-works.html">„So funktioniert's“</a>.<br />
   </p>
 
   <div class="form-buttons">
     <button class="secondary" id="back-btn-3">Zurück</button>
     <button class="primary pdf-btn">
-      <img src="/src/assets/icons/tools.svg" alt="" class="icon icon-inline" /> Als PDF ausdrucken
+      <img src="/src/assets/icons/tools.svg" alt="" class="icon icon-inline" />
+      Als PDF ausdrucken
     </button>
   </div>
 </main>
@@ -528,4 +635,3 @@
     display: none !important;
   }
 </style>
-
