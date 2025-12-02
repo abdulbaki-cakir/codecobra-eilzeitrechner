@@ -1,5 +1,6 @@
 #calculator-section {
   padding: 5rem 2rem;
+
   --rc-radius: 20px;
   --rc-gap: 0.8rem;
   --rc-padding-y: 1.2rem;
@@ -839,7 +840,7 @@
 
 /* Der Wrapper für die Karten innen */
 #details-wrapper {
-  padding: 20px 20px 0 20px;
+  padding: 20px 20px 0;
 }
 
 /* Abstand der Karten im Wrapper */
