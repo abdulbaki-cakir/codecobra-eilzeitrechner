@@ -272,8 +272,8 @@ export function renderResults(data) {
     if (extensionCapWasHit) {
       if (topErrorMsg) topErrorMsg.classList.remove("hidden");
 
-      if (partTimeCardLeft) partTimeCardLeft.style.backgroundColor = "#f05670";
-      if (finalResultBox) finalResultBox.style.backgroundColor = "#f05670";
+      if (partTimeCardLeft) partTimeCardLeft.style.backgroundColor = "#ba0000";
+      if (finalResultBox) finalResultBox.style.backgroundColor = "#ba0000";
 
       if (dailyHoursEl) dailyHoursEl.style.display = "none";
     } else {
