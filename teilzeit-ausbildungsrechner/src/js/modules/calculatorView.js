@@ -108,7 +108,7 @@ function updateProgress(currentStep) {
   const progressSteps = document.querySelectorAll(".progress-container .step");
 
   progressSteps.forEach((step) => {
-    const stepNum = parseInt(step.dataset.step);
+    const stepNum = parseInt(step.dataset.step, 10);
     step.classList.toggle("active", stepNum <= currentStep);
   });
 
@@ -118,7 +118,7 @@ function updateProgress(currentStep) {
   else progressPercentage = 100;
 
   if (progressLine) {
-    progressLine.style.width = progressPercentage + "%";
+    progressLine.style.width = `${progressPercentage}%`;
   }
 }
 
@@ -149,7 +149,6 @@ export function renderResults(data) {
   const finalResultBox = document.querySelector(".final-result-box");
   const dailyHoursEl = document.getElementById("final-daily-hours");
 
-  // Element für die globale Warnung holen
   const topErrorMsg = document.getElementById("global-cap-error");
 
   const servedTimeCard = document.querySelector(".served-time-card");
@@ -237,10 +236,8 @@ export function renderResults(data) {
   if (capWasHitShortening) {
     const capMessage = document.createElement("p");
     capMessage.classList.add("cap-message");
-
-    capMessage.innerHTML = `
-    <i><strong>Hinweis: Maximal zulässige Verkürzung erreicht.</strong></i><br>`;
-
+    capMessage.innerHTML =
+      "<i><strong>Hinweis: Maximal zulässige Verkürzung erreicht.</strong></i><br>";
     detailedShorteningsDiv.appendChild(capMessage);
   }
 
@@ -254,27 +251,34 @@ export function renderResults(data) {
   }
 
   if (partTimeHoursAvailable) {
-    partTimeCard.style.display = "flex";
+    if (partTimeCard) partTimeCard.style.display = "flex";
     document.getElementById("extension-card-value").textContent =
       finalExtensionMonths;
     const partTimeDetailsDiv = document.getElementById(
       "detailed-part-time-card",
     );
 
-    partTimeDetailsDiv.innerHTML = "";
+    if (partTimeDetailsDiv) {
+      partTimeDetailsDiv.innerHTML = "";
 
-    if (finalExtensionMonths === 0) {
-      partTimeDetailsDiv.innerHTML = `<p class="detailed-part-time-item">Die Reduzierung der wöchentlichen Arbeitszeit von <strong>${fullTimeHours.toFixed(1)}h</strong> auf <strong>${partTimeHours.toFixed(1)}h</strong> führt zu einer geringfügigen Verlängerung von ≤ ${gracePeriod} Monaten, die in der Praxis oft ignoriert wird.</p>`;
-    } else {
-      partTimeDetailsDiv.innerHTML = `<p class="detailed-part-time-item">Die Reduzierung der wöchentlichen Arbeitszeit von <strong>${fullTimeHours.toFixed(1)}h</strong> auf <strong>${partTimeHours.toFixed(1)}h</strong> für die verbleibende Dauer führt zu einer Verlängerung <strong>um ${finalExtensionMonths} Monate</strong>.</p>`;
+      if (finalExtensionMonths === 0) {
+        partTimeDetailsDiv.innerHTML = `<p class="detailed-part-time-item">Die Reduzierung der wöchentlichen Arbeitszeit von <strong>${fullTimeHours.toFixed(
+          1,
+        )}h</strong> auf <strong>${partTimeHours.toFixed(
+          1,
+        )}h</strong> führt zu einer geringfügigen Verlängerung von ≤ ${gracePeriod} Monaten, die in der Praxis oft ignoriert wird.</p>`;
+      } else {
+        partTimeDetailsDiv.innerHTML = `<p class="detailed-part-time-item">Die Reduzierung der wöchentlichen Arbeitszeit von <strong>${fullTimeHours.toFixed(
+          1,
+        )}h</strong> auf <strong>${partTimeHours.toFixed(
+          1,
+        )}h</strong> für die verbleibende Dauer führt zu einer Verlängerung <strong>um ${finalExtensionMonths} Monate</strong>.</p>`;
+      }
     }
 
-    // Logik für die Anzeige der oberen Warnbox
     if (extensionCapWasHit) {
       if (topErrorMsg) {
         topErrorMsg.classList.remove("hidden");
-
-        // --- NEU: Text dynamisch mit Variable setzen ---
         topErrorMsg.innerHTML = `
           <strong>⚠️ Achtung:</strong> Die Gesamtdauer darf höchstens um die Hälfte
           der regulären Ausbildungsdauer verlängert werden (max. ${maxAllowedTotalDuration} Monate). <br />Lösung: Erhöhe die
@@ -284,7 +288,6 @@ export function renderResults(data) {
 
       if (partTimeCardLeft) partTimeCardLeft.style.backgroundColor = "#ba0000";
       if (finalResultBox) finalResultBox.style.backgroundColor = "#ba0000";
-
       if (dailyHoursEl) dailyHoursEl.style.display = "none";
     } else {
       if (topErrorMsg) topErrorMsg.classList.add("hidden");
@@ -302,13 +305,12 @@ export function renderResults(data) {
     document.getElementById("final-duration-result").textContent =
       `${finalTotalDuration} Monate`;
   } else {
-    partTimeCard.style.display = "none";
+    if (partTimeCard) partTimeCard.style.display = "none";
     document.getElementById("final-duration-result").textContent =
       `${finalTotalDuration} Monate`;
 
     if (partTimeCardLeft) partTimeCardLeft.style.backgroundColor = "#1a1a1a";
     if (finalResultBox) finalResultBox.style.backgroundColor = "#000";
-
     if (dailyHoursEl) dailyHoursEl.style.display = "none";
   }
 
@@ -355,6 +357,7 @@ export function renderResults(data) {
 
         if (myResultsChart) myResultsChart.destroy();
 
+        // eslint-disable-next-line new-cap
         myResultsChart = new window.Chart(ctx, {
           type: "bar",
           data: {
@@ -371,7 +374,6 @@ export function renderResults(data) {
                   newFullTimeDuration,
                   finalTotalDuration,
                 ],
-
                 backgroundColor: [
                   "#6EC6C5",
                   "#2A5D67",
@@ -418,18 +420,12 @@ export function setupDetailsToggle() {
       const isHidden = wrapper.classList.contains("hidden");
 
       if (isHidden) {
-        // --- AUFKLAPPEN ---
         wrapper.classList.remove("hidden");
-
         container.classList.add("open");
-
         btn.textContent = "Detaillierte Erklärung einklappen ▲";
       } else {
-        // --- ZUKLAPPEN ---
         wrapper.classList.add("hidden");
-
         container.classList.remove("open");
-
         btn.textContent = "Detaillierte Erklärung anzeigen ▼";
       }
     });
