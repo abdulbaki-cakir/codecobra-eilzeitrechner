@@ -3,117 +3,128 @@ export function setupPdfExport() {
     if (!btn) return;
   
     btn.addEventListener("click", async () => {
-      const results = document.querySelector(".results-container");
+      const detailsWrapper = document.getElementById("details-wrapper");
+      const detailsBtn = document.getElementById("toggle-details-btn");
       const chartCanvas = document.getElementById("results-chart");
   
-      if (!results) return alert("Ergebnisbereich nicht gefunden.");
-  
-      // UMD jsPDF aus window Namespace holen
+      // jsPDF aus CDN holen
       // eslint-disable-next-line new-cap
       const pdf = new window.jspdf.jsPDF("p", "mm", "a4");
-  
       const pageWidth = pdf.internal.pageSize.getWidth();
-      let y = 15;
+      let y = 20;
   
       /* ---------------------------------------------------------
-         HEADER
+         0) DETAILS AUTOMATISCH AUSKLAPPEN
       --------------------------------------------------------- */
-      pdf.setFontSize(20);
-      pdf.text("Teilzeit-Ausbildungsrechner – Ergebnisbericht", pageWidth / 2, y, {
-        align: "center",
-      });
-      y += 12;
+      const wasHidden = detailsWrapper?.classList.contains("hidden");
   
-      pdf.setLineWidth(0.5);
-      pdf.line(10, y, pageWidth - 10, y);
-      y += 10;
+      if (wasHidden) {
+        detailsWrapper.classList.remove("hidden");
+        if (detailsBtn) detailsBtn.textContent = "Detaillierte Erklärung einklappen ▲";
   
-      /* ---------------------------------------------------------
-         WICHTIGE WERTE HOLEN
-      --------------------------------------------------------- */
-      const finalDuration = document.getElementById("final-duration-result")?.textContent ?? "--";
-      const shortening = document.getElementById("shortening-card-value")?.textContent ?? "--";
-      const remaining = document.getElementById("new-full-time-card-value")?.textContent ?? "--";
-      const extension = document.getElementById("extension-card-value")?.textContent ?? "--";
-  
-      /* ---------------------------------------------------------
-         BLOCK: ZUSAMMENFASSUNG
-      --------------------------------------------------------- */
-      pdf.setFontSize(14);
-      pdf.text("Zusammenfassung", 10, y);
-      y += 8;
-  
-      pdf.setFontSize(11);
-      pdf.text(`Gesamtdauer: ${finalDuration}`, 10, y); y += 6;
-      pdf.text(`Gesamte Verkürzung: ${shortening} Monate`, 10, y); y += 6;
-      pdf.text(`Restdauer nach Verkürzung: ${remaining} Monate`, 10, y); y += 6;
-      pdf.text(`Verlängerung durch Teilzeit: ${extension} Monate`, 10, y); y += 10;
-  
-      /* ---------------------------------------------------------
-         BLOCK: DETAIL-ERKLÄRUNG
-      --------------------------------------------------------- */
-      const detailsWrapper = document.getElementById("details-wrapper");
-  
-      if (detailsWrapper) {
-        const items = detailsWrapper.querySelectorAll(".result-card");
-  
-        pdf.setFontSize(14);
-        pdf.text("Detaillierte Erklärung", 10, y);
-        y += 8;
-        pdf.setFontSize(11);
-  
-        items.forEach((card) => {
-          const title =
-            card.querySelector(".result-card-title")?.textContent ?? "—";
-          const number =
-            card.querySelector(".result-card-number")?.textContent ?? "—";
-  
-          const paragraphs = card.querySelectorAll("p");
-  
-          if (y > 260) {
-            pdf.addPage();
-            y = 20;
-          }
-  
-          pdf.setFont(undefined, "bold");
-          pdf.text(`${title}: ${number}`, 10, y);
-          pdf.setFont(undefined, "normal");
-          y += 6;
-  
-          paragraphs.forEach((p) => {
-            const text = pdf.splitTextToSize(p.textContent, pageWidth - 20);
-            pdf.text(text, 10, y);
-            y += text.length * 6 + 2;
-          });
-  
-          y += 4;
-        });
+        await new Promise((_resolve) => setTimeout(_resolve, 150));
       }
   
       /* ---------------------------------------------------------
-         BLOCK: DIAGRAMM
+         1) HEADER – OFFIZIELLER LOOK
       --------------------------------------------------------- */
-      if (chartCanvas) {
-        const chartImage = chartCanvas.toDataURL("image/png", 1.0);
+      pdf.setFontSize(22);
+      pdf.setFont("helvetica", "bold");
+      pdf.text("Ausbildungsrechner – Analysebericht", pageWidth / 2, y, { align: "center" });
+      y += 8;
   
-        if (y > 190) {
+      pdf.setLineWidth(0.5);
+      pdf.line(15, y, pageWidth - 15, y);
+      y += 10;
+  
+      /* ---------------------------------------------------------
+         2) DETALLIERTE ERKLÄRUNG (GANZ OBEN!)
+      --------------------------------------------------------- */
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(16);
+      pdf.text("Detaillierte Erklärung", 15, y);
+      y += 10;
+  
+      const detailCards = detailsWrapper.querySelectorAll(".result-card");
+  
+      detailCards.forEach((card) => {
+        if (y > 260) {
           pdf.addPage();
           y = 20;
         }
   
-        pdf.setFontSize(14);
-        pdf.text("Grafische Übersicht", 10, y);
-        y += 8;
+        const titleText = card.querySelector(".result-card-title")?.textContent ?? "";
+        const numberText = card.querySelector(".result-card-number")?.textContent ?? "";
+        const paragraphs = [...card.querySelectorAll("p")].map((p) => p.textContent.trim());
   
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(13);
+        pdf.text(`• ${titleText}: ${numberText}`, 15, y);
+        y += 6;
+  
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(11);
+  
+        paragraphs.forEach((text) => {
+          const lines = pdf.splitTextToSize(text, pageWidth - 30);
+  
+          if (y + lines.length * 6 > 280) {
+            pdf.addPage();
+            y = 20;
+          }
+  
+          pdf.text(lines, 20, y);
+          y += lines.length * 6 + 2;
+        });
+  
+        y += 6;
+      });
+  
+      /* ---------------------------------------------------------
+         3) BALKENDIAGRAMM – GROß, ZENTRIERT, OFFIZIELL
+      --------------------------------------------------------- */
+      if (chartCanvas) {
+        pdf.addPage();
+        y = 20;
+  
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(16);
+        pdf.text("Grafische Übersicht", 15, y);
+        y += 10;
+  
+        const chartIMG = chartCanvas.toDataURL("image/png", 1.0);
         const imgWidth = 170;
         const imgHeight = (chartCanvas.height / chartCanvas.width) * imgWidth;
   
-        pdf.addImage(chartImage, "PNG", 20, y, imgWidth, imgHeight);
+        pdf.addImage(chartIMG, "PNG", (pageWidth - imgWidth) / 2, y, imgWidth, imgHeight);
         y += imgHeight + 12;
       }
   
       /* ---------------------------------------------------------
-         FOOTER
+         4) ZUSAMMENFASSUNG – AM ENDE
+      --------------------------------------------------------- */
+      const duration = document.getElementById("final-duration-result")?.textContent ?? "--";
+      const shortening = document.getElementById("shortening-card-value")?.textContent ?? "--";
+      const remaining = document.getElementById("new-full-time-card-value")?.textContent ?? "--";
+      const extension = document.getElementById("extension-card-value")?.textContent ?? "--";
+  
+      pdf.addPage();
+      y = 20;
+  
+      pdf.setFontSize(16);
+      pdf.setFont("helvetica", "bold");
+      pdf.text("Zusammenfassung", 15, y);
+      y += 10;
+  
+      pdf.setFontSize(12);
+      pdf.setFont("helvetica", "normal");
+      pdf.text(`Gesamtausbildungsdauer: ${duration}`, 15, y); y += 6;
+      pdf.text(`Gesamte Verkürzung: ${shortening} Monate`, 15, y); y += 6;
+      pdf.text(`Restdauer nach Verkürzung: ${remaining} Monate`, 15, y); y += 6;
+      pdf.text(`Verlängerung durch Teilzeit: ${extension} Monate`, 15, y); y += 10;
+  
+      /* ---------------------------------------------------------
+         5) FOOTER
       --------------------------------------------------------- */
       pdf.setFontSize(10);
       pdf.text(
@@ -124,6 +135,14 @@ export function setupPdfExport() {
       );
   
       pdf.save("Ausbildungsrechner.pdf");
+  
+      /* ---------------------------------------------------------
+         6) DETAILS ZURÜCKKLAPPEN
+      --------------------------------------------------------- */
+      if (wasHidden) {
+        detailsWrapper.classList.add("hidden");
+        if (detailsBtn) detailsBtn.textContent = "Detaillierte Erklärung anzeigen ▼";
+      }
     });
   }
   
