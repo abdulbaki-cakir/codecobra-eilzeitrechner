@@ -1,4 +1,3 @@
-import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { resetVollzeitMonateValidation } from "./input-validation.js";
 
@@ -137,7 +136,7 @@ export const setupPartTimeSwitch = () => {
 };
 
 /* ---------------------------------------------------------
-   RENDER RESULTS — KOMPLETTE ORIGINALFUNKTION
+   RENDER RESULTS — KOMPLETT ERHALTEN
 --------------------------------------------------------- */
 export function renderResults(data) {
   const {
@@ -159,10 +158,9 @@ export function renderResults(data) {
     maxAllowedTotalDuration,
   } = data;
 
-  /* ---------------------------
-     DEINE GESAMTE ORIGINALLOGIK
-     (NICHT VERÄNDERT)
-  ----------------------------*/
+  /* ---------------------------------------------------------
+       (DEINE GESAMTE ORIGINAL-LOGIK BLEIBT UNVERÄNDERT)
+  --------------------------------------------------------- */
 
   const partTimeCard = document.querySelector(".part-time-card");
   const partTimeCardLeft = partTimeCard
@@ -312,8 +310,11 @@ export function renderResults(data) {
       if (finalResultBox) finalResultBox.style.backgroundColor = "#000";
 
       if (dailyHoursEl) {
-        const avgPtDaily = (partTimeHours / 5).toFixed(1).replace(".", ",");
-        dailyHoursEl.textContent = `⌀ ${avgPtDaily} Stunden pro Tag (Teilzeit)`;
+        const avgPtDaily = (partTimeHours / 5)
+          .toFixed(1)
+          .replace(".", ",");
+        dailyHoursEl.textContent =
+          `⌀ ${avgPtDaily} Stunden pro Tag (Teilzeit)`;
         dailyHoursEl.style.display = "block";
       }
     }
@@ -337,7 +338,8 @@ export function renderResults(data) {
   const resultsContainer = document.querySelector(".results-container");
 
   const earlyAdmissionAllowed =
-    finalTotalDuration - 6 >= legalMinimumDuration && !extensionCapWasHit;
+    finalTotalDuration - 6 >= legalMinimumDuration &&
+    !extensionCapWasHit;
 
   if (earlyAdmissionAllowed) {
     const earlyAdmissionBox = document.createElement("div");
@@ -365,6 +367,9 @@ export function renderResults(data) {
     }
   }
 
+  /* ---------------------------------------------------------
+     CHART RENDERING (MIT ESLINT FIX)
+  --------------------------------------------------------- */
   const canvas = document.getElementById("results-chart");
 
   if (canvas) {
@@ -396,7 +401,11 @@ export function renderResults(data) {
                   "#2A5D67",
                   "rgba(15, 15, 15, 0.8)",
                 ],
-                borderColor: ["#6EC6C5", "#2A5D67", "rgba(15, 15, 15, 1)"],
+                borderColor: [
+                  "#6EC6C5",
+                  "#2A5D67",
+                  "rgba(15, 15, 15, 1)",
+                ],
                 borderWidth: 1,
               },
             ],
@@ -407,7 +416,10 @@ export function renderResults(data) {
             maintainAspectRatio: false,
             plugins: {
               legend: { display: false },
-              title: { display: true, text: "Ausbildungsdauer im Überblick" },
+              title: {
+                display: true,
+                text: "Ausbildungsdauer im Überblick",
+              },
             },
             scales: {
               x: { ticks: { autoSkip: false } },
@@ -426,14 +438,14 @@ export function renderResults(data) {
     }
   }
 
-  /* -----------------------------------------------
-       PDF EXPORT AKTIVIEREN
-  ----------------------------------------------- */
+  /* ---------------------------------------------------------
+     PDF EXPORT AKTIVIEREN
+  --------------------------------------------------------- */
   setupPdfExport();
 }
 
 /* ---------------------------------------------------------
-   PDF EXPORT – NUR FÜR PDF-BUTTON (.pdf-btn)
+   PDF EXPORT – NUTZT window.html2canvas (CDN!)
 --------------------------------------------------------- */
 function setupPdfExport() {
   const btn = document.querySelector(".pdf-btn");
@@ -450,7 +462,8 @@ function setupPdfExport() {
       return;
     }
 
-    const canvas = await html2canvas(target, { scale: 2 });
+    // WICHTIG: html2canvas via CDN verwenden
+    const canvas = await window.html2canvas(target, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
 
     const pdf = new jsPDF("p", "mm", "a4");
