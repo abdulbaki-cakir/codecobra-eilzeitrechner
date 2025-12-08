@@ -1,6 +1,11 @@
 import { initializeCalculator } from "./modules/calculatorController.js";
+import { setupPdfExport } from "./modules/pdfExport.js";
+setupPdfExport();
+
+
 
 import {
+  
   initializeNavigation,
   initializeFooterNavigation,
 } from "./modules/navigation.js";
