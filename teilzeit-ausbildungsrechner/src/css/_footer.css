@@ -1,7 +1,7 @@
 /* --- Footer Styles --- */
 .site-footer {
-    background-color: #1a1a1a;
-    color: #f0f0f0;
+    background-color: var(--primary);
+    color: #f9eded;
     padding: 50px 0;
     font-size: 16px;
 }
@@ -11,7 +11,7 @@
     justify-content: space-between;
     gap: 30px;
     padding-bottom: 30px;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     flex-wrap: wrap;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .footer-column a {
-    color: #ccc;
+    color: #ffe1e3;
     text-decoration: none;
     transition: color 0.2s ease;
 }
@@ -47,14 +47,14 @@
 }
 
 .footer-column p {
-    color: #ccc;
+    color: #ffe1e3;
     line-height: 1.6;
 }
 
 .footer-bottom {
     padding-top: 30px;
     text-align: center;
-    color: #888;
+    color: #ffe1e3;
 }
 
 .faq-link-mobil {

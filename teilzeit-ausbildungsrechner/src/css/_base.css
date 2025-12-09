@@ -3,15 +3,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap');
 
 :root {
-    --bg-color: #fff;
-    --text-color: #000;
+    --primary: #b93137;
+    --primary-dark: #a02a2f;
+    --primary-soft: #f4eded;
+    --bg-color: #fcf9f9;
+    --text-color: #1f1f1f;
     --text-light: #555;
-    --primary-button-bg: #0d2a57;
+    --primary-button-bg: var(--primary);
     --primary-button-text: #fff;
-    --card-bg: rgba(255, 255, 255, 0.95);
-    --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    --card-border: rgba(0, 0, 0, 0.05);
-    --calculator-input-bg: #1a1a1a;
+    --card-bg: #fff;
+    --card-shadow: 0 18px 45px -20px rgba(0, 0, 0, 0.3);
+    --card-border: rgba(185, 49, 55, 0.15);
+    --calculator-input-bg: #f4eded;
 }
 
 * {
@@ -56,9 +59,9 @@ main {
 }
 
 .content-section {
-    padding-top: 150px; /* Platz für den fixierten Header + Abstand */
-    padding-bottom: 50px; /* Platz über dem Footer */
-    min-height: 50vh;     /* Stellt sicher, dass der Footer unten bleibt */
+    padding-top: 150px;
+    padding-bottom: 50px;
+    min-height: 50vh;
 }
 
 

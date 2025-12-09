@@ -6,9 +6,9 @@ header {
   width: 100%;
   z-index: 100;
   padding: 15px 0;
-  background-color: var(--bg-color);
-  border-bottom: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  border-bottom: 1px solid rgba(185, 49, 55, 0.12);
+  box-shadow: 0 6px 20px rgba(185, 49, 55, 0.12);
 
   /* KORREKTUR: HIER IST DIE FEHLENDE TRANSITION FÜR DEN "SMOOTH FADE" */
   transition: transform 0.3s ease-in-out;
@@ -61,7 +61,7 @@ nav {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: #222;
+  background-color: var(--primary);
   color: #fff;
   border-radius: 50px;
   padding: 10px 20px;
@@ -74,7 +74,7 @@ nav {
 }
 
 .nav-btn:hover {
-  background-color: #444;
+  background-color: var(--primary-dark);
   transform: translateY(-2px);
 }
 
@@ -96,10 +96,10 @@ nav {
   top: 100%;
   right: 0;
   margin-top: 8px;
-  background-color: var(--bg-color);
-  border: 1px solid #e0e0e0;
+  background-color: #fff;
+  border: 1px solid rgba(185, 49, 55, 0.15);
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 26px rgba(185, 49, 55, 0.12);
   min-width: 160px;
   z-index: 101;
   padding: 5px 0;
@@ -122,7 +122,7 @@ nav {
 }
 
 .language-option:hover {
-  background-color: #f5f5f5;
+  background-color: var(--primary-soft);
 }
 
 .language-option img {

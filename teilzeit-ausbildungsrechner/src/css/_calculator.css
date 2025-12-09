@@ -8,21 +8,20 @@
   --rc-size: 20px;
   --rc-stroke: 2px;
   --rc-dot-size: 10px;
-  --rc-fg: #fff;
-  --rc-fg-muted: #ccc;
-  --rc-sep: rgba(255, 255, 255, 0.15);
-  --rc-hover: rgba(255, 255, 255, 0.85);
-  --rc-focus: 0 0 0 3px rgba(255, 255, 255, 0.35);
-  --rc-shadow: 0 6px 24px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.12);
+  --rc-fg: #1f1f1f;
+  --rc-fg-muted: #6a6a6a;
+  --rc-sep: rgba(185, 49, 55, 0.18);
+  --rc-hover: rgba(185, 49, 55, 0.9);
+  --rc-focus: 0 0 0 3px rgba(185, 49, 55, 0.25);
+  --rc-shadow: 0 12px 24px rgba(185, 49, 55, 0.16);
   --rc-transition: 160ms ease;
-  --calculator-input-bg: #1a1a1a;
+  --calculator-input-bg: #f4eded;
   --bg-color: #fff;
 }
 
 #calculator-section .container {
   width: 100%;
   max-width: 700px;
-  background: var(--bg-color);
   padding: 2rem;
 }
 #calculator-section header {
@@ -34,6 +33,7 @@
   border-bottom: 1px solid #ddd;
   border: none !important;
   box-shadow: none !important;
+  background-color: transparent;
 }
 #calculator-section header h1 {
   font-size: 2.5rem;
@@ -65,11 +65,11 @@
   transition: width 0.4s ease-in-out;
 }
 #calculator-section .progress-line-bg {
-  background-color: #e0e0e0;
+  background-color: rgba(185, 49, 55, 0.12);
   width: 100%;
 }
 #calculator-section .progress-line-fill {
-  background-color: #000;
+  background-color: var(--primary);
   width: 0%;
 }
 
@@ -79,7 +79,7 @@
   align-items: center;
   position: relative;
   z-index: 1;
-  color: #aaa;
+  color: #a87376;
   transition: color 0.4s ease-in-out;
   flex: 1;
 }
@@ -91,9 +91,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg-color);
+  background-color: #fff;
   border-radius: 50%;
-  border: 2px solid #e0e0e0;
+  border: 2px solid rgba(185, 49, 55, 0.25);
   padding: 10px;
   transition:
     background-color 0.4s ease-in-out,
@@ -103,7 +103,7 @@
   width: 24px;
   height: 24px;
   border-radius: 0;
-  filter: grayscale(1);
+  filter: grayscale(0.2);
   transition: filter 0.4s ease-in-out;
 }
 #calculator-section .step p {
@@ -113,21 +113,21 @@
   padding: 0 5px;
 }
 #calculator-section .step.active p {
-  color: #000;
+  color: var(--text-color);
 }
 #calculator-section .step.active .icon-step {
-  background-color: #000;
-  border-color: #000;
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 #calculator-section .step.active .icon-step img {
   filter: brightness(0) invert(1);
 }
 #calculator-section .calculator-form {
   background: #fff;
-  border: 2px solid #e1e1e1;
+  border: 2px solid rgba(185, 49, 55, 0.18);
   border-radius: 28px;
   padding: 2.25rem 1.75rem;
-  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.35);
+  box-shadow: none;
   max-width: 700px;
   margin: 3rem auto;
 }
@@ -152,6 +152,7 @@
   width: 100%;
   min-height: 50px;
   background-color: var(--calculator-input-bg);
+  border: 1px solid rgba(185, 49, 55, 0.16);
   border-radius: 50px;
   padding: 6px 6px 6px 1.5rem;
 }
@@ -160,7 +161,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: white;
+  color: var(--text-color);
   font-size: 1rem;
   white-space: normal;
 }
@@ -169,7 +170,7 @@
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  filter: brightness(0) invert(1);
+  filter: none;
 }
 
 #calculator-section .pdf-btn .icon-inline {
@@ -182,7 +183,7 @@
   height: 38px;
   flex-shrink: 0;
   background-color: #fff;
-  color: #000;
+  color: #1f1f1f;
   border: none;
   outline: none;
   border-radius: 50px;
@@ -219,11 +220,11 @@
   transform: none;
   min-width: 320px;
   max-width: min(420px, calc(100vw - 24px));
-  background-color: #2b2b2b;
-  color: #fff;
+  background-color: #fff;
+  color: #1f1f1f;
   padding: 0.9rem 1rem;
   border-radius: 10px;
-  border: 1px solid #3d3d3d;
+  border: 1px solid rgba(185, 49, 55, 0.18);
   font-size: 0.92rem;
   line-height: 1.4;
   text-align: left;
@@ -247,14 +248,14 @@
   right: 20px;
   border-width: 8px 8px 0;
   border-style: solid;
-  border-color: #2b2b2b transparent transparent;
+  border-color: #fff transparent transparent;
 }
 #calculator-section .icon {
   width: 1em;
   height: 1em;
   display: inline-block;
   vertical-align: middle;
-  fill: #000;
+  fill: var(--primary);
   stroke: none;
 }
 
@@ -267,7 +268,7 @@
 #calculator-section button {
   padding: 0.6rem 1.25rem;
   border-radius: 8px;
-  border: 1px solid #000;
+  border: 1px solid var(--primary);
   font-size: 1rem;
   cursor: pointer;
   transition:
@@ -288,24 +289,23 @@
 }
 #calculator-section button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
 }
 #calculator-section button.primary {
-  background-color: #000;
+  background-color: var(--primary);
   color: #fff;
-  border-color: #000;
+  border-color: var(--primary);
 }
 #calculator-section button.primary:hover {
-  background-color: #111;
+  background-color: var(--primary-dark);
   transform: translateY(-1px);
 }
 #calculator-section button.secondary {
   background-color: #fff;
-  color: #000;
-  border-color: #000;
+  color: var(--text-color);
+  border-color: var(--primary);
 }
 #calculator-section button.secondary:hover {
-  background-color: #fafafa;
+  background-color: var(--primary-soft);
   transform: translateY(-1px);
 }
 
@@ -316,13 +316,13 @@
 
 #calculator-section .radio-card-container {
   width: 100%;
-  background-color: var(--calculator-input-bg);
+  background-color: var(--primary-soft);
   border-radius: var(--rc-radius);
   padding: var(--rc-padding-y) var(--rc-padding-x);
   color: var(--rc-fg);
-  box-shadow: var(--rc-shadow);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  backdrop-filter: saturate(120%) blur(2px);
+  box-shadow: none;
+  border: 1px solid rgba(185, 49, 55, 0.16);
+  backdrop-filter: saturate(120%) blur(1px);
 }
 
 #calculator-section .radio-card-header {
@@ -400,7 +400,7 @@
   .radio-card-option
   input[type="radio"]:checked
   + .radio-custom {
-  border-color: var(--rc-hover);
+  border-color: var(--rc-fg);
   transform: translateZ(0) scale(1.02);
 }
 #calculator-section
@@ -414,12 +414,12 @@
   .radio-card-option
   input[type="radio"]:focus-visible
   + .radio-custom {
-  box-shadow: var(--rc-focus);
+  box-shadow: none;
   outline: none;
 }
 
 #calculator-section .radio-card-option:hover .radio-custom {
-  border-color: var(--rc-hover);
+  border-color: var(--rc-fg);
 }
 
 #calculator-section
@@ -446,6 +446,9 @@
   color: var(--rc-fg-muted);
   font-size: 0.82em;
   margin-left: 2px;
+}
+.radio-label strong {
+  color: var(--text-color);
 }
 
 @media (max-width: 500px) {
@@ -474,7 +477,7 @@
     .radio-card-option
     input[type="radio"]:focus-visible
     + .radio-custom {
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.55);
+    box-shadow: none;
   }
 }
 
@@ -594,7 +597,7 @@
 }
 
 .final-result-box {
-  background-color: #000;
+  background: linear-gradient(135deg, var(--primary), #cf474d);
   color: #fff;
   padding: 1.5rem;
   border-radius: 12px;
@@ -625,16 +628,16 @@
 
 .result-card {
   display: flex;
-  background-color: #f4f4f4;
+  background-color: #fff;
   border-radius: 12px;
   margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: none;
   overflow: hidden;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(185, 49, 55, 0.18);
 }
 
 .result-card-left {
-  background-color: #1a1a1a;
+  background-color: var(--primary);
   color: #fff;
   padding: 1.5rem;
   display: flex;
@@ -667,13 +670,13 @@
   padding: 1.5rem;
   flex-grow: 1;
   font-size: 0.95em;
-  color: #333;
+  color: #2b2b2b;
 }
 
 @media (max-width: 600px) {
   .result-card {
     flex-direction: column;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
   }
 
   .result-card-left {
@@ -699,18 +702,18 @@
 }
 
 .result-card-right strong {
-  color: #000;
+  color: var(--text-color);
 }
 
 .result-card-header-info {
   font-size: 1.1em;
   font-weight: 500;
   margin-bottom: 1rem;
-  color: #333;
+  color: #2b2b2b;
 }
 
 .result-card-header-info strong {
-  color: #000;
+  color: var(--text-color);
 }
 
 .card-divider {
@@ -733,17 +736,17 @@
   border-top: none;
   font-style: italic;
   font-weight: bold;
-  border: 2px solid #a50000;
-  background-color: #ffe6e6;
+  border: 2px solid var(--primary);
+  background-color: #fdebec;
   border-radius: 8px;
-  color: #a50000;
+  color: var(--text-color);
 }
 
 .result-card-info-box {
   display: flex;
   align-items: center;
-  background-color: #1a1a1a;
-  color: #fff;
+  background-color: var(--primary-soft);
+  color: #2b2b2b;
   padding: 16px 20px;
   border-radius: 8px;
   margin-top: 20px;
@@ -772,7 +775,7 @@
 }
 
 .result-card-info-box .info-box-text strong {
-  color: #fff;
+  color: var(--text-color);
   font-weight: 700;
 }
 #average-hours-box img.info-icon {
@@ -780,7 +783,7 @@
   height: 24px;
   margin-right: 12px;
   opacity: 1;
-  filter: brightness(0) invert(1);
+  filter: none;
 }
 #early-admission-box img.info-icon {
   width: 24px;
@@ -788,32 +791,29 @@
   margin-right: 12px;
   opacity: 1;
 }
-/* --- Styles für den Detail-Container --- */
 
 .details-container {
   margin-top: 2rem;
   border-radius: 8px;
   transition: all 0.3s ease;
-  border: 1px solid transparent; /* Platzhalter für Border */
+  border: 1px solid transparent;
 }
 
-/* Status: GEÖFFNET -> Stärkeres Grau */
 .details-container.open {
-  background-color: #dee2e6; /* Deutlich stärkeres Grau */
-  border: 1px solid #adb5bd; /* Rand ebenfalls etwas dunkler */
+  background-color: transparent;
+  border: 1px solid rgba(185, 49, 55, 0.25); 
   padding-bottom: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08); /* Schatten leicht verstärkt */
+  box-shadow: none; 
 }
 
-/* Der Button selbst (Geschlossen) */
 .details-toggle-btn {
   width: 100%;
-  padding: 14px; /* Etwas mehr Fläche */
+  padding: 14px;
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
-  background-color: #f8f9fa; /* Sehr helles Grau, fast Weiß */
-  border: 1px solid #ced4da;
+  color: #2b2b2b;
+  background-color: #fff;
+  border: 1px solid rgba(185, 49, 55, 0.18);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -824,27 +824,22 @@
 }
 
 .details-toggle-btn:hover {
-  background-color: #e2e6ea; /* Hover-Effekt */
-  border-color: #adb5bd;
+  background-color: #fff;
 }
 
-/* Der Button (Wenn GEÖFFNET) */
 .details-container.open .details-toggle-btn {
-  /* Farbe passt sich dem Container an, wirkt wie ein "Reiter" */
-  background-color: #ced4da; /* Dunkler, passend zum neuen BG */
-  border-bottom: 1px solid #adb5bd; /* Trennlinie zum Inhalt */
+  background-color: transparent;
+  border-bottom: 1px solid rgba(185, 49, 55, 0.25);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  color: #212529; /* Text etwas dunkler */
+  color: #212529;
 }
 
-/* Der Wrapper für die Karten innen */
 #details-wrapper {
   padding: 20px 20px 0;
 }
 
-/* Abstand der Karten im Wrapper */
 #details-wrapper .result-card {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Karten heben sich vom grauen BG ab */
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(185, 49, 55, 0.1);
+  border: 1px solid rgba(185, 49, 55, 0.12);
 }
