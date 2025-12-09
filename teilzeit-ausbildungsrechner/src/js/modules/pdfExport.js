@@ -4,7 +4,6 @@ export function setupPdfExport() {
 
   btn.addEventListener("click", async () => {
     const detailsWrapper = document.getElementById("details-wrapper");
-    const detailsBtn = document.getElementById("toggle-details-btn");
     const chartCanvas = document.getElementById("results-chart");
 
     // jsPDF aus CDN holen
