@@ -1,16 +1,16 @@
-// src/__tests__/selenium/tzr-test.js
-import { Builder } from 'selenium-webdriver';
+// src/selenium/tzr-test.js
 import {
+  createDriver,
   waitVisibleById,
   typeNumberById,
   clickRadioByNameAndValue,
   clickButtonById,
-} from './selenium-helpers.js';
+} from './selenium-helpers.e2e.js';
 
 const BASE_URL = process.env.TZR_BASE_URL ?? 'http://localhost:5173';
 
-async function runTzrE2eTest() {
-  const driver = await new Builder().forBrowser('chrome').build();
+export async function runTzrE2eTest() {
+  const driver = await createDriver();
 
   try {
     console.log(`Starte TZR-E2E-Test auf ${BASE_URL}`);
@@ -72,4 +72,8 @@ async function runTzrE2eTest() {
   }
 }
 
-runTzrE2eTest();
+runTzrE2eTest().catch((err) => {
+  console.error('TZR-E2E-Test – Unbehandelter Fehler:', err);
+  process.exitCode = 1;
+});
+  

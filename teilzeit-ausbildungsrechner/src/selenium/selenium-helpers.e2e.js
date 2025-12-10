@@ -1,7 +1,18 @@
-// src/__tests__/selenium/selenium-helpers.js
-import { By, until } from 'selenium-webdriver';
+import { Builder, By, until } from 'selenium-webdriver';
 
 const DEFAULT_TIMEOUT = 10_000;
+
+export function createDriver() {
+  const seleniumUrl = process.env.SELENIUM_REMOTE_URL;
+  const builder = new Builder().forBrowser('chrome');
+
+  if (seleniumUrl) {
+    // Im CI: an Selenium-Container anbinden
+    builder.usingServer(seleniumUrl);
+  }
+
+  return builder.build();
+}
 
 export async function waitVisibleById(driver, id, timeout = DEFAULT_TIMEOUT) {
   const el = await driver.wait(until.elementLocated(By.id(id)), timeout);
