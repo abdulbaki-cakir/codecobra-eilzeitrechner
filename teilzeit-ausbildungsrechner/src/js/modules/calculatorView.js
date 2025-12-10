@@ -159,7 +159,6 @@ export function renderResults(data) {
   // 1. Daten entpacken
   const {
     originalDuration,
-    fullTimeHours,
     partTimeHours,
     partTimeHoursAvailable,
     initialFullTimeMonths,
