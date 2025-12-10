@@ -11,12 +11,8 @@ const BASE_URL = process.env.TZR_BASE_URL ?? 'http://localhost:5173';
 
 async function runTzrE2eTest() {
   let driver;
-  //driver = await new Builder().forBrowser('chrome').build();
-  //driver = await new Builder().forBrowser('firefox').build();
   driver = await new Builder().forBrowser('MicrosoftEdge').build();
   
-
-
   try {
     console.log(`Starte TZR-E2E-Test auf ${BASE_URL}`);
     await driver.get(BASE_URL);
