@@ -1,4 +1,3 @@
-// src/__tests__/selenium/selenium-helpers.js
 import { By, until } from 'selenium-webdriver';
 
 const DEFAULT_TIMEOUT = 10_000;
