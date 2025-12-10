@@ -99,8 +99,7 @@ export async function runScenarioLisa() {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
-  runScenarioLisa().catch(() => {
-    process.exitCode = 1;
-  });
-}
+runScenarioLisa().catch((err) => {
+  console.error('Szenario 1 – Unbehandelter Fehler:', err);
+  process.exitCode = 1;
+});

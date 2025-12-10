@@ -5,7 +5,7 @@ import {
   typeNumberById,
   clickRadioByNameAndValue,
   clickButtonById,
-} from './selenium-helpers.js';
+} from './selenium-helpers.e2e.js';
 
 const BASE_URL = process.env.TZR_BASE_URL ?? 'http://localhost:5173';
 
@@ -72,8 +72,8 @@ export async function runTzrE2eTest() {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
-  runTzrE2eTest().catch(() => {
-    process.exitCode = 1;
-  });
-}
+runTzrE2eTest().catch((err) => {
+  console.error('TZR-E2E-Test – Unbehandelter Fehler:', err);
+  process.exitCode = 1;
+});
+  
