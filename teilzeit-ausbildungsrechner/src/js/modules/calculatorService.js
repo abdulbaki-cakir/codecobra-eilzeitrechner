@@ -1,15 +1,21 @@
+/**
+ * Service-Modul für die mathematische Logik des Rechners.
+ * Enthält die Regeln zur Verkürzung, Teilzeit-Umrechnung und Sonderregeln (Deckelungen).
+ */
+
 import { RULES } from "./calculatorConfig.js";
 
 /**
  * BERECHNUNGSSCHRITT 1:
- * Berechnet die offizielle Verkürzung (Neue Logik mit Deckeln).
+ * Ermittelt die offizielle Verkürzung basierend auf Vorbildung/Alter.
+ * Berücksichtigt dabei gesetzliche Obergrenzen und Mindestdauern.
  */
 export function calculateShortening(selections, originalDuration) {
   const detailedShorteningReasons = [];
   const reasonConfig = RULES.reasons;
   let potentialShortening = 0;
 
-  // 1. Sammle und summiere alle Werte
+  // 1. Summiere alle ausgewählten Anrechnungsgründe
   for (const id in reasonConfig) {
     const config = reasonConfig[id];
     const currentValue = parseInt(selections[id], 10) || 0;
@@ -23,20 +29,19 @@ export function calculateShortening(selections, originalDuration) {
       reasonText = config.text;
     }
 
-    // Prüfen ob der Grund variabel ist (Standard: false)
     const isVariable = config.isVariable || false;
 
     const currentReason = {
       reason: reasonText,
       months: currentValue,
-      isVariable, // <--- HIER WURDE GEKÜRZT (Property Shorthand)
+      isVariable,
     };
 
     potentialShortening += currentReason.months;
     detailedShorteningReasons.push(currentReason);
   }
 
-  // 2. Deckel 1: Max. 12 Monate aus Anrechnungsgründen
+  // 2. Deckel 1: Maximale Anrechnung (meist 12 Monate)
   const maxShorteningFromReasons =
     RULES.general_rules.max_shortening_from_reasons;
   const shorteningAfterReasonCap = Math.min(
@@ -44,20 +49,20 @@ export function calculateShortening(selections, originalDuration) {
     maxShorteningFromReasons,
   );
 
-  // 3. Deckel 2: Gesetzliche Mindestdauer
+  // 3. Deckel 2: Einhaltung der gesetzlichen Mindestausbildungsdauer
   const durationRule = RULES.minimum_durations.find(
     (rule) => originalDuration >= rule.original,
   );
   const minimumDuration = durationRule.min;
   const maxAllowedShorteningLegal = originalDuration - minimumDuration;
 
-  // 4. Finales Ergebnis (Minimum aus beiden Deckeln)
+  // 4. Finales Ergebnis (Das Minimum aus beiden Deckeln gewinnt)
   const finalShortening = Math.min(
     shorteningAfterReasonCap,
     maxAllowedShorteningLegal,
   );
 
-  // Prüft ob Deckel erreicht wurde
+  // Markierung, falls ein Deckel die ursprüngliche Summe reduziert hat
   const capWasHit =
     potentialShortening > finalShortening ||
     finalShortening >= maxShorteningFromReasons;
@@ -71,7 +76,7 @@ export function calculateShortening(selections, originalDuration) {
 
 /**
  * BERECHNUNGSSCHRITT 2:
- * Berechnet die Dauer in Teilzeit.
+ * Rechnet eine Vollzeit-Dauer in Teilzeit um (einfacher Dreisatz).
  */
 export function calculatePartTimeDuration(
   fullTimeEquivalentDuration,
@@ -88,7 +93,8 @@ export function calculatePartTimeDuration(
 
 /**
  * FINALER BERECHNUNGSSCHRITT:
- * Berechnet alle Endergebnisse.
+ * Orchestriert die gesamte Berechnung und wendet Sonderregeln an
+ * (Geringfügigkeitsgrenze, maximale Gesamtverlängerung).
  */
 export function calculateFinalResults(inputs) {
   const {
@@ -105,32 +111,33 @@ export function calculateFinalResults(inputs) {
   const shorteningResult = calculateShortening(selections, originalDuration);
   const officialShorteningMonths = shorteningResult.totalShortening;
 
-  // 2. Neue Dauer (Vollzeit)
+  // 2. Neue Basis-Dauer (Vollzeit) nach Verkürzung
   const newFullTimeDuration = originalDuration - officialShorteningMonths;
 
-  // 3. Gesetzliche Mindestdauer finden (für View-Logik)
+  // 3. Gesetzliche Mindestdauer ermitteln (für Anzeige in der View)
   const durationRule = RULES.minimum_durations.find(
     (rule) => originalDuration >= rule.original,
   );
   const legalMinimumDuration = durationRule.min;
 
-  // 4. Verbleibende VZ-Äquivalente (Restzeit)
+  // 4. Berechnung der verbleibenden Restzeit (nach bereits geleisteten VZ-Monaten)
   let remainingFullTimeEquivalent = newFullTimeDuration - initialFullTimeMonths;
   if (remainingFullTimeEquivalent < 0) remainingFullTimeEquivalent = 0;
 
-  // 5. Restzeit bei Teilzeit
+  // 5. Umrechnung der Restzeit in Teilzeit
   let remainingPartTimeDuration = calculatePartTimeDuration(
     remainingFullTimeEquivalent,
     fullTimeHours,
     partTimeHours,
   );
 
-  // 6. Reale Verlängerung / Gesamtdauer
+  // 6. Ermittlung der realen Verlängerung
   const realExtensionMonths =
     remainingPartTimeDuration - remainingFullTimeEquivalent;
   const realTotalDuration = initialFullTimeMonths + remainingPartTimeDuration;
 
-  // 7. SONDERREGEL (Grace Period)
+  // 7. SONDERREGEL "Grace Period":
+  // Verlängerungen unter der Geringfügigkeitsgrenze (z.B. 6 Monate) werden ignoriert.
   const gracePeriod = RULES.general_rules.part_time_grace_period_months;
   let finalExtensionMonths = realExtensionMonths;
   let finalTotalDuration = realTotalDuration;
@@ -141,11 +148,13 @@ export function calculateFinalResults(inputs) {
     finalTotalDuration = initialFullTimeMonths + remainingPartTimeDuration;
   }
 
-  // 8. SONDERREGEL (1.5x Obergrenze)
+  // 8. SONDERREGEL "Maximalfaktor":
+  // Prüft, ob die Gesamtdauer das 1.5-fache der Regeldauer überschreitet.
   const maxFactor = RULES.general_rules.max_duration_factor;
   const maxAllowedTotalDuration = Math.ceil(originalDuration * maxFactor);
   let extensionCapWasHit = realTotalDuration > maxAllowedTotalDuration;
 
+  // Falls Grace-Period greift, darf der Cap-Hinweis nicht angezeigt werden
   if (extensionCapWasHit && finalExtensionMonths === 0) {
     extensionCapWasHit = false;
   }

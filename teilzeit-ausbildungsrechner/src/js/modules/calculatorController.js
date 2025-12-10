@@ -8,7 +8,7 @@ import { setupDetailsToggle } from "./calculatorView.js";
 let currentStep = 1;
 
 /**
- * Haupt-Event-Handler für die Berechnung (auf "Weiter" in Schritt 2).
+ * Steuert den Ablauf der Berechnung: Daten holen -> Rechnen -> Anzeigen
  */
 function handleCalculation() {
   // 1. Alle Inputs holen
@@ -22,11 +22,11 @@ function handleCalculation() {
 }
 
 /**
- * INITIALISIERUNG:
- * Startet die gesamte Logik für den Rechner.
+ * Haupt-Initialisierung: Setzt Event-Listener, Validierung und UI-Logik auf.
  */
 export function initializeCalculator() {
-  // --- 1. Radio-Buttons mit Selects verknüpfen ---
+  // --- UI-Logik: Radio-Buttons mit Dropdowns verknüpfen ---
+  // Sorgt dafür, dass die Auswahl "Ja" das entsprechende Select-Menü aktiviert.
   View.linkRadiosToSelect("age-radio", "age-select");
   View.linkRadiosToSelect("school-finish-radio", "school-finish");
   View.linkRadiosToSelect("experience-radio", "experience-select");
@@ -35,20 +35,21 @@ export function initializeCalculator() {
   View.linkRadiosToSelect("child-care-radio", "child-care-select");
   View.linkRadiosToSelect("family-care-radio", "family-care-select");
 
-  // --- 2. Button-Listener (Navigation & Aktionen) ---
+  // --- Navigation & Flow-Steuerung ---
   const nextBtn1 = document.getElementById("next-btn-1");
   const backBtn2 = document.getElementById("back-btn-2");
   const nextBtn2 = document.getElementById("next-btn-2");
   const backBtn3 = document.getElementById("back-btn-3");
 
+  // Schritt 1 -> Schritt 2 (Mit Validierung)
   if (nextBtn1) {
     nextBtn1.addEventListener("click", () => {
-      // Validierung
+      // Validierung aller Pflichtfelder in Schritt 1
       const isVollzeitValid = Validation.validateVollzeitstunden(true);
       const isWochenstundenValid = Validation.validateWochenstunden(true);
       const isVollzeitMonateValid = Validation.validateVollzeitMonate(true);
 
-      // Nur bei Erfolg weitergehen UND scrollen
+      // Nur weiterschalten, wenn alles valide ist
       if (isVollzeitValid && isWochenstundenValid && isVollzeitMonateValid) {
         currentStep = 2;
         View.showStep(currentStep);
@@ -57,6 +58,7 @@ export function initializeCalculator() {
     });
   }
 
+  // Zurück zu Schritt 1
   if (backBtn2) {
     backBtn2.addEventListener("click", () => {
       currentStep = 1;
@@ -65,10 +67,10 @@ export function initializeCalculator() {
     });
   }
 
+  // Schritt 2 -> Schritt 3 (Berechnung auslösen)
   if (nextBtn2) {
     nextBtn2.addEventListener("click", () => {
-      // HIER WAR DER FEHLER: Wir rufen jetzt die korrigierte Funktion auf
-      handleCalculation();
+      handleCalculation(); // Kern-Logik ausführen
 
       currentStep = 3;
       View.showStep(currentStep);
@@ -76,6 +78,7 @@ export function initializeCalculator() {
     });
   }
 
+  // Zurück zu Schritt 2 (Ergebnis verwerfen/korrigieren)
   if (backBtn3) {
     backBtn3.addEventListener("click", () => {
       currentStep = 2;
@@ -84,11 +87,12 @@ export function initializeCalculator() {
     });
   }
 
-  // --- 3. Initialen Zustand setzen ---
+  // --- Initialen UI-Zustand setzen ---
   View.showStep(currentStep);
   View.setupPartTimeSwitch();
 
-  // --- 4. VALIDIERUNGS-LISTENER ---
+  // --- Live-Validierung (Blur & Enter Events) ---
+  // Diese Listener sorgen für sofortiges Feedback, wenn der Nutzer ein Feld verlässt
   const vollzeitInput = document.getElementById("vollzeitstunden");
   const wochenstundenInput = document.getElementById("wochenstunden");
   const vollzeitMonateInput = document.getElementById("vollzeit-monate");
@@ -97,6 +101,7 @@ export function initializeCalculator() {
   if (vollzeitInput) {
     const validateVollzeit = () => {
       Validation.validateVollzeitstunden(true);
+      // Wenn Wochenstunden schon gefüllt sind, diese auch neu validieren (Verhältnis-Check)
       if (wochenstundenInput.value.trim() !== "") {
         Validation.validateWochenstunden(false);
       }
@@ -136,6 +141,7 @@ export function initializeCalculator() {
     });
   }
 
+  // Validierung neu anstoßen, wenn sich abhängige Felder ändern
   if (dauerSelect) {
     dauerSelect.addEventListener("change", () => {
       Validation.validateVollzeitMonate(false);
@@ -152,4 +158,5 @@ export function initializeCalculator() {
   });
 }
 
+// Global: Toggle-Logik für Details aktivieren
 setupDetailsToggle();

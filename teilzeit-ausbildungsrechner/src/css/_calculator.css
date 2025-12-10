@@ -597,7 +597,7 @@
 }
 
 .final-result-box {
-  background: linear-gradient(135deg, var(--primary), #cf474d);
+  background: #000;
   color: #fff;
   padding: 1.5rem;
   border-radius: 12px;
@@ -637,7 +637,7 @@
 }
 
 .result-card-left {
-  background-color: var(--primary);
+  background-color: #1a1a1a;
   color: #fff;
   padding: 1.5rem;
   display: flex;
@@ -801,9 +801,9 @@
 
 .details-container.open {
   background-color: transparent;
-  border: 1px solid rgba(185, 49, 55, 0.25); 
+  border: 1px solid rgba(185, 49, 55, 0.25);
   padding-bottom: 20px;
-  box-shadow: none; 
+  box-shadow: none;
 }
 
 .details-toggle-btn {

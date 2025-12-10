@@ -4,6 +4,7 @@
 
 /**
  * 1. FUNKTION: Validiert Vollzeitstunden (Feld 1)
+ * Prüft auf: Zahl, Bereich 35-48h, 0,5er Schritte.
  */
 export function validateVollzeitstunden(showErrorIfEmpty = false) {
   const vollzeitInput = document.getElementById("vollzeitstunden");
@@ -16,6 +17,7 @@ export function validateVollzeitstunden(showErrorIfEmpty = false) {
   let errorMessage = "";
   const value = vollzeitInput.value.trim();
 
+  // Leeres Feld prüfen
   if (value === "") {
     if (showErrorIfEmpty) {
       errorMessage = "Bitte die Vollzeitstunden eingeben.";
@@ -24,9 +26,10 @@ export function validateVollzeitstunden(showErrorIfEmpty = false) {
       isValid = false;
     }
   } else {
+    // Komma zu Punkt für JS-Float
     const numValue = parseFloat(value.replace(",", "."));
 
-    // Prüfen, ob der Wert ein Vielfaches von 0.5 ist: (Wert * 100) muss durch 50 teilbar sein
+    // Logik für 0,5er Schritte: (Wert * 100) muss durch 50 teilbar sein (Rest 0)
     const isMultipleOfHalf = Math.round(numValue * 100) % 50 === 0;
 
     if (isNaN(numValue)) {
@@ -41,6 +44,7 @@ export function validateVollzeitstunden(showErrorIfEmpty = false) {
     }
   }
 
+  // UI-Update: Fehler anzeigen oder entfernen
   if (!isValid && errorMessage) {
     errorTextSpan.textContent = errorMessage;
     errorPopup.classList.add("visible");
@@ -55,6 +59,7 @@ export function validateVollzeitstunden(showErrorIfEmpty = false) {
 
 /**
  * 2. FUNKTION: Validiert Teilzeit-Wochenstunden (Feld 2)
+ * WICHTIG: Hängt vom Wert der Vollzeitstunden ab (min. 50%).
  */
 export function validateWochenstunden(showErrorIfEmpty = false) {
   const wochenstundenInput = document.getElementById("wochenstunden");
@@ -66,10 +71,10 @@ export function validateWochenstunden(showErrorIfEmpty = false) {
     return false;
   }
 
-  // Vollzeit-Wert holen
+  // Referenzwert aus dem Vollzeit-Feld holen
   const vollzeitNum = parseFloat(vollzeitInput.value.trim().replace(",", "."));
 
-  // Prüfen, ob wir einen validen Vergleichswert haben (Zahl und > 0)
+  // Prüfen, ob wir einen validen Vergleichswert haben
   const hasValidVollzeit = !isNaN(vollzeitNum) && vollzeitNum > 0;
 
   let isValid = true;
@@ -87,14 +92,14 @@ export function validateWochenstunden(showErrorIfEmpty = false) {
     const numValue = parseFloat(value.replace(",", "."));
     const isMultipleOfHalf = Math.round(numValue * 100) % 50 === 0;
 
-    // Berechnung der 50%-Grenze
+    // Mindestgrenze berechnen: Teilzeit muss ≥ 50% der Vollzeit sein (BBiG Regelung)
     const minFiftyPercent = hasValidVollzeit ? vollzeitNum * 0.5 : 0;
 
     if (isNaN(numValue)) {
       errorMessage = "Bitte eine Zahl eingeben.";
       isValid = false;
     }
-    // NEU: Prüfung auf 50% der Vollzeit (statt starrer 20-36 Grenze)
+    // Prüfung auf Mindeststunden (50% Regel)
     else if (hasValidVollzeit && numValue < minFiftyPercent) {
       const minString = minFiftyPercent.toString().replace(".", ",");
       errorMessage = `Teilzeit muss mind. 50% der Vollzeit sein (mind. ${minString} Std.).`;
@@ -112,6 +117,7 @@ export function validateWochenstunden(showErrorIfEmpty = false) {
     }
   }
 
+  // UI-Update
   if (!isValid && errorMessage) {
     errorTextSpan.textContent = errorMessage;
     errorPopup.classList.add("visible");
@@ -126,18 +132,19 @@ export function validateWochenstunden(showErrorIfEmpty = false) {
 
 /**
  * 3. FUNKTION: Validiert "Monate in Vollzeit" (Feld 3)
+ * Nur aktiv, wenn Option "Teilzeit erst später starten" gewählt wurde.
  */
 export function validateVollzeitMonate(showErrorIfEmpty = false) {
-  // 1. Prüfen, ob das Feld überhaupt aktiv ist
+  // 1. Prüfen, ob das Feld überhaupt relevant/sichtbar ist
   const isSwitchLaterRadio = document.querySelector(
     'input[name="part-time-start-radio"]:checked',
   );
 
+  // Wenn "Sofort Teilzeit" (Value 0) gewählt ist -> Validation überspringen (ist immer valid)
   if (!isSwitchLaterRadio || isSwitchLaterRadio.value !== "1") {
     return true;
   }
 
-  // 2. Elemente holen
   const monateInput = document.getElementById("vollzeit-monate");
   const dauerSelect = document.getElementById("ausbildungsdauer");
   const errorPopup = document.getElementById("vollzeit-monate-error");
@@ -146,14 +153,13 @@ export function validateVollzeitMonate(showErrorIfEmpty = false) {
   if (!monateInput || !dauerSelect || !errorPopup || !errorTextSpan)
     return false;
 
-  // 3. Werte holen
   const monateValue = monateInput.value.trim();
+  // Gesamtdauer der Ausbildung als Obergrenze
   const dauerNum = parseInt(dauerSelect.value, 10);
 
   let isValid = true;
   let errorMessage = "";
 
-  // 4. Logik anwenden
   if (monateValue === "") {
     if (showErrorIfEmpty) {
       errorMessage = "Bitte Monate eingeben.";
@@ -163,6 +169,8 @@ export function validateVollzeitMonate(showErrorIfEmpty = false) {
     }
   } else {
     const monateNum = parseInt(monateValue, 10);
+
+    // Logik: Muss > 0 sein und kleiner als die Gesamtdauer
     if (isNaN(monateNum) || monateNum <= 0) {
       errorMessage = "Bitte eine gültige Zahl > 0 eingeben.";
       isValid = false;
@@ -172,7 +180,7 @@ export function validateVollzeitMonate(showErrorIfEmpty = false) {
     }
   }
 
-  // 5. DOM aktualisieren
+  // UI-Update
   if (!isValid && errorMessage) {
     errorTextSpan.textContent = errorMessage;
     errorPopup.classList.add("visible");
@@ -187,7 +195,7 @@ export function validateVollzeitMonate(showErrorIfEmpty = false) {
 
 /**
  * 4. HELPER: Setzt den Fehlerstatus für "Monate in Vollzeit" zurück.
- * Wird von calculatorView.js (setupPartTimeSwitch) aufgerufen.
+ * Wird genutzt, wenn der User von "Später" auf "Sofort" zurückschaltet.
  */
 export function resetVollzeitMonateValidation() {
   const vollzeitMonateInput = document.getElementById("vollzeit-monate");
