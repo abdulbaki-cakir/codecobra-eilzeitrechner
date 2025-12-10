@@ -160,6 +160,7 @@ export function renderResults(data) {
   const {
     originalDuration,
     partTimeHours,
+    fullTimeHours,
     partTimeHoursAvailable,
     initialFullTimeMonths,
     shorteningResult,
@@ -307,11 +308,19 @@ export function renderResults(data) {
     );
     if (partTimeDetailsDiv) {
       partTimeDetailsDiv.innerHTML = "";
+
       if (finalExtensionMonths === 0) {
-        // Geringfügigkeit (Bagatellgrenze)
-        partTimeDetailsDiv.innerHTML = `<p class="detailed-part-time-item">Die Reduzierung ... führt zu einer geringfügigen Verlängerung von ≤ ${gracePeriod} Monaten, die in der Praxis oft ignoriert wird.</p>`;
+        partTimeDetailsDiv.innerHTML = `<p class="detailed-part-time-item">Die Reduzierung der wöchentlichen Arbeitszeit von <strong>${fullTimeHours.toFixed(
+          1,
+        )}h</strong> auf <strong>${partTimeHours.toFixed(
+          1,
+        )}h</strong> führt zu einer geringfügigen Verlängerung von ≤ ${gracePeriod} Monaten, die in der Praxis oft ignoriert wird.</p>`;
       } else {
-        partTimeDetailsDiv.innerHTML = `<p class="detailed-part-time-item">Die Reduzierung ... führt zu einer Verlängerung <strong>um ${finalExtensionMonths} Monate</strong>.</p>`;
+        partTimeDetailsDiv.innerHTML = `<p class="detailed-part-time-item">Die Reduzierung der wöchentlichen Arbeitszeit von <strong>${fullTimeHours.toFixed(
+          1,
+        )}h</strong> auf <strong>${partTimeHours.toFixed(
+          1,
+        )}h</strong> für die verbleibende Dauer führt zu einer Verlängerung <strong>um ${finalExtensionMonths} Monate</strong>.</p>`;
       }
     }
 
@@ -380,7 +389,7 @@ export function renderResults(data) {
     earlyTextBox.classList.add("info-box-text");
     const earlyInfoText = document.createElement("p");
     earlyInfoText.innerHTML =
-      "<strong>Hinweis zur vorzeitigen Zulassung:</strong><br>Gute Leistungen können eine Verkürzung um 6 Monate ermöglichen...";
+      "<strong>Hinweis zur vorzeitigen Zulassung:</strong><br>Gute Leistungen können eine Verkürzung um 6 Monate ermöglichen. Der Antrag erfolgt bei der zuständigen Stelle (z. B. IHK/HWK) und ist unabhängig von den hier berechneten Gründen.";
 
     earlyTextBox.appendChild(earlyInfoText);
     earlyAdmissionBox.appendChild(icon);
