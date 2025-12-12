@@ -67,7 +67,6 @@ selenium-test-job:
     SELENIUM_REMOTE_URL: "http://selenium:4444/wd/hub"
   
   script:
-    # Wir sind dank before_script bereits in teilzeit-ausbildungsrechner
     - echo "Baue Projekt für Selenium-E2E..."
     - npm run build
 
@@ -85,9 +84,11 @@ selenium-test-job:
     - echo "Verwende TZR_BASE_URL=${TZR_BASE_URL} für Selenium-Tests"
 
     - echo "Starte Selenium-Tests..."
-    - npm run test:selenium:lisa
     - npm run test:selenium:tzr
-
+    - npm run test:selenium:lisa
+    - npm run test:selenium:lukas
+    - npm run test:selenium:paul
+    - npm run test:selenium:marie
 
 # --- STAGE: DOCKERHUB ---
 
