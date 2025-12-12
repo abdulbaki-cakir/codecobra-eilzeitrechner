@@ -1,4 +1,4 @@
-﻿import { resetVollzeitMonateValidation } from "./input-validation.js";
+import { resetVollzeitMonateValidation } from "./input-validation.js";
 import { getTranslation, onLanguageChange } from "./language.js";
 import infoIcon from "../../assets/icons/information.svg";
 
