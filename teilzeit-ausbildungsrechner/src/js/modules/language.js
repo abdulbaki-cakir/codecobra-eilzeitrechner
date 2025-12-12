@@ -28,7 +28,9 @@ export function onLanguageChange(callback) {
 
 export function applyTranslations(lang = currentLanguage) {
   currentLanguage = translations[lang] ? lang : "de";
-  localStorage.setItem(LANGUAGE_STORAGE_KEY, currentLanguage);
+
+  // ÄNDERUNG: sessionStorage statt localStorage
+  sessionStorage.setItem(LANGUAGE_STORAGE_KEY, currentLanguage);
 
   const languageData = getTranslationsFor(currentLanguage);
 
@@ -58,6 +60,11 @@ export function applyTranslations(lang = currentLanguage) {
     : currentLanguage.split("_")[0] || "de";
   document.documentElement.setAttribute("lang", htmlLang);
 
+  const easyCheckbox = document.getElementById("easy-language-checkbox");
+  if (easyCheckbox) {
+    easyCheckbox.checked = currentLanguage === "de_easy";
+  }
+
   dispatchLanguageChanged(currentLanguage);
 }
 
@@ -65,46 +72,71 @@ export function applyTranslations(lang = currentLanguage) {
  * Aktiviert das Sprach-Dropdown und schaltet die Variante "Leichte Sprache" um.
  */
 function initializeLanguageSwitcher() {
-  const toggleButton = document.getElementById("language-toggle");
-  const menu = document.getElementById("language-menu");
+  const langToggle = document.getElementById("language-toggle");
+  const langMenu = document.getElementById("language-menu");
   const languageOptions = document.querySelectorAll(".language-option");
-  const easyToggle = document.getElementById("easy-language-toggle");
 
-  // Initiale Sprache aus dem Speicher lesen
-  const storedLang = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+  const easyToggle = document.getElementById("easy-language-toggle");
+  const easyMenu = document.getElementById("easy-language-menu");
+  const easyCheckbox = document.getElementById("easy-language-checkbox");
+
+  // ÄNDERUNG: sessionStorage statt localStorage beim Laden
+  const storedLang = sessionStorage.getItem(LANGUAGE_STORAGE_KEY);
   applyTranslations(storedLang || "de");
 
-  if (toggleButton && menu) {
-    toggleButton.addEventListener("click", function (event) {
+  if (langToggle && langMenu) {
+    langToggle.addEventListener("click", function (event) {
       event.preventDefault();
       event.stopPropagation();
-      menu.classList.toggle("show");
+      if (easyMenu) easyMenu.classList.remove("show");
+      langMenu.classList.toggle("show");
     });
 
     languageOptions.forEach((option) => {
       option.addEventListener("click", function (event) {
         event.preventDefault();
-        menu.classList.remove("show");
+        langMenu.classList.remove("show");
       });
     });
-
-    window.addEventListener("click", function (event) {
-      if (!toggleButton.contains(event.target) && !menu.contains(event.target)) {
-        menu.classList.remove("show");
-      }
-    });
   }
 
-  if (easyToggle) {
+  if (easyToggle && easyMenu && easyCheckbox) {
     easyToggle.addEventListener("click", (event) => {
       event.preventDefault();
-      const nextLanguage = currentLanguage === "de_easy" ? "de" : "de_easy";
-      applyTranslations(nextLanguage);
-      easyToggle.classList.toggle("active", nextLanguage === "de_easy");
+      event.stopPropagation();
+      if (langMenu) langMenu.classList.remove("show");
+      easyMenu.classList.toggle("show");
     });
 
-    easyToggle.classList.toggle("active", currentLanguage === "de_easy");
+    easyMenu.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
+
+    easyCheckbox.addEventListener("change", (event) => {
+      const isChecked = event.target.checked;
+      const nextLanguage = isChecked ? "de_easy" : "de";
+      applyTranslations(nextLanguage);
+    });
   }
+
+  window.addEventListener("click", function (event) {
+    if (
+      langMenu &&
+      langToggle &&
+      !langToggle.contains(event.target) &&
+      !langMenu.contains(event.target)
+    ) {
+      langMenu.classList.remove("show");
+    }
+    if (
+      easyMenu &&
+      easyToggle &&
+      !easyToggle.contains(event.target) &&
+      !easyMenu.contains(event.target)
+    ) {
+      easyMenu.classList.remove("show");
+    }
+  });
 }
 
 export { initializeLanguageSwitcher };

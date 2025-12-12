@@ -127,8 +127,8 @@
         class="icon info-icon"
       />
       <div class="info-box" data-translate-key="info_training_duration">
-        Bitte wählen Sie die übliche Vollzeit-Gesamtdauer Ihrer
-        Ausbildung (z. B. laut Vertrag 24, 36 oder 42 Monate).
+        Bitte wählen Sie die übliche Vollzeit-Gesamtdauer Ihrer Ausbildung (z.
+        B. laut Vertrag 24, 36 oder 42 Monate).
       </div>
     </div>
   </div>
@@ -169,10 +169,7 @@
       ></div>
 
       <div class="input-container-nested hidden" id="vollzeit-monate-input">
-        <div
-          class="input-prefix"
-          data-translate-key="label_fulltime_months"
-        >
+        <div class="input-prefix" data-translate-key="label_fulltime_months">
           Monate in Vollzeit
         </div>
         <input
@@ -260,8 +257,8 @@
         class="icon info-icon"
       />
       <div class="info-box" data-translate-key="info_age">
-        Sind Sie zu Beginn der Ausbildung über 21 Jahre alt? In vielen
-        Fällen können Sie dann bis zu 12 Monate kürzen.
+        Sind Sie zu Beginn der Ausbildung über 21 Jahre alt? In vielen Fällen
+        können Sie dann bis zu 12 Monate kürzen.
       </div>
     </div>
     <select name="age" id="age-select" style="display: none">
@@ -280,17 +277,15 @@
       <div class="radio-card-body">
         <label class="radio-card-option">
           <input type="radio" name="school-finish-radio" value="0" checked />
-          <span
-            class="radio-custom"
-          ></span><span class="radio-label" data-translate-key="option_school_none">Keinen der genannten</span>
+          <span class="radio-custom"></span
+          ><span class="radio-label" data-translate-key="option_school_none"
+            >Keinen der genannten</span
+          >
         </label>
         <label class="radio-card-option">
           <input type="radio" name="school-finish-radio" value="0" />
           <span class="radio-custom"></span
-          ><span
-            class="radio-label"
-            data-translate-key="option_school_basic"
-          >
+          ><span class="radio-label" data-translate-key="option_school_basic">
             Hauptschulabschluss
           </span>
         </label>
@@ -317,9 +312,8 @@
         class="icon info-icon"
       />
       <div class="info-box" data-translate-key="info_school">
-        Je höher Ihr Schulabschluss, desto eher kann eine Verkürzung
-        möglich sein. Wählen Sie den höchsten Abschluss, den Sie
-        haben.
+        Je höher Ihr Schulabschluss, desto eher kann eine Verkürzung möglich
+        sein. Wählen Sie den höchsten Abschluss, den Sie haben.
       </div>
     </div>
     <select id="school-finish" style="display: none">
@@ -510,9 +504,8 @@
         class="icon info-icon"
       />
       <div class="info-box" data-translate-key="info_familycare">
-        Pflegen Sie regelmäßig Angehörige (z. B. Eltern,
-        Großeltern)? Das kann für eine Teilzeit-Ausbildung
-        berücksichtigt werden.
+        Pflegen Sie regelmäßig Angehörige (z. B. Eltern, Großeltern)? Das kann
+        für eine Teilzeit-Ausbildung berücksichtigt werden.
       </div>
     </div>
     <select name="family-care" id="family-care-select" style="display: none">
@@ -547,10 +540,7 @@
     ></p>
 
     <div class="final-result-box">
-      <span
-        class="result-label"
-        data-translate-key="label_final_duration"
-      >
+      <span class="result-label" data-translate-key="label_final_duration">
         Gesamtausbildungsdauer ab Beginn
       </span>
       <span class="result-value" id="final-duration-result">-- Monate</span>
@@ -630,8 +620,7 @@
             <hr class="card-divider" />
             <div id="detailed-shortenings-card">
               <p data-translate-key="result_shortening_copy">
-                Hier werden die Gründe für die Verkürzung
-                aufgelistet.
+                Hier werden die Gründe für die Verkürzung aufgelistet.
               </p>
             </div>
           </div>
@@ -702,19 +691,22 @@
     </span>
     <br /><br />
     <span data-translate-key="disclaimer_more">
-      Eine detaillierte Erklärung zur Berechnung finden Sie auf unserer
-      Seite
+      Eine detaillierte Erklärung zur Berechnung finden Sie auf unserer Seite
     </span>
-    <a href="how-it-works.html" data-translate-key="link_how_it_works">So funktioniert's</a>
+    <a href="how-it-works.html" data-translate-key="link_how_it_works"
+      >So funktioniert's</a
+    >
     .
   </p>
 
   <div class="form-buttons">
-    <button class="secondary" id="back-btn-3" data-translate-key="btn_back">
-      Zurück
-    </button>
-    <button class="primary pdf-btn" data-translate-key="btn_pdf">
-      Als PDF ausdrucken
+    <button class="secondary" id="back-btn-3">Zurück</button>
+    <button class="primary pdf-btn">Als PDF ausdrucken</button>
+  </div>
+
+  <div class="reset-container">
+    <button class="reset-btn" onclick="window.location.href='index.html'">
+      Zurücksetzen
     </button>
   </div>
 </main>
@@ -724,4 +716,3 @@
     display: none !important;
   }
 </style>
-

@@ -843,3 +843,97 @@
   box-shadow: 0 2px 8px rgba(185, 49, 55, 0.1);
   border: 1px solid rgba(185, 49, 55, 0.12);
 }
+
+/* Styling für das Dropdown Layout */
+.easy-language-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  gap: 15px;
+  white-space: nowrap;
+}
+
+/* --- Toggle Switch CSS --- */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc; /* Grau wenn aus */
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+/* Grün wenn an */
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #4caf50;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+/* Runde Ecken für den Slider */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Container, um den Button mittig unter die anderen zu setzen */
+#calculator-section .reset-container {
+  display: flex;
+  justify-content: center; /* Zentriert den Button horizontal */
+  margin-top: 1rem; /* Abstand nach oben zu den anderen Buttons */
+  width: 100%;
+}
+
+/* Der grüne Reset Button */
+#calculator-section button.reset-btn {
+  background-color: #64aba5;
+  color: #fff;
+  border-color: #64aba5;
+}
+
+/* Hover Effekt für den Reset Button */
+#calculator-section button.reset-btn:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+  transform: translateY(-1px);
+}
