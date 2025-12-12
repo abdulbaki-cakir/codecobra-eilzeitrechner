@@ -23,7 +23,7 @@ Um dieses Projekt als Docker-Container auszuführen, wird nur eine Software ben�
 Starten sie "Docker Desktop" und führe diesen Befehl in deinem Terminal aus. Docker lädt das Image automatisch herunter und startet es unter dem Namen `CodeCobra-TZR`.
 
 ```bash
-docker run -d -p 8080:80 --name CodeCobra-TZR abcakir/codecobra-docker:latest
+docker run -d -p 8080:8080 --name CodeCobra-TZR abcakir/codecobra-docker:latest
 ``` 
 
 - Öffne deinen Browser und gehe auf: http://localhost:8080
