@@ -15,7 +15,7 @@
   --rc-focus: 0 0 0 3px rgba(185, 49, 55, 0.25);
   --rc-shadow: 0 12px 24px rgba(185, 49, 55, 0.16);
   --rc-transition: 160ms ease;
-  --calculator-input-bg: #f4eded;
+  --calculator-input-bg: #ecd6d6;
   --bg-color: #fff;
 }
 
@@ -842,4 +842,27 @@
 #details-wrapper .result-card {
   box-shadow: 0 2px 8px rgba(185, 49, 55, 0.1);
   border: 1px solid rgba(185, 49, 55, 0.12);
+}
+
+
+/* Container, um den Button mittig unter die anderen zu setzen */
+#calculator-section .reset-container {
+  display: flex;
+  justify-content: center; /* Zentriert den Button horizontal */
+  margin-top: 1rem; /* Abstand nach oben zu den anderen Buttons */
+  width: 100%;
+}
+
+/* Der grüne Reset Button */
+#calculator-section button.reset-btn {
+  background-color: #64aba5;
+  color: #fff;
+  border-color: #64aba5;
+}
+
+/* Hover Effekt für den Reset Button */
+#calculator-section button.reset-btn:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+  transform: translateY(-1px);
 }

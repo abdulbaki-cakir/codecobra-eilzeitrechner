@@ -7,10 +7,7 @@ header {
   z-index: 100;
   padding: 15px 0;
   background-color: #fff;
-  border-bottom: 1px solid rgba(185, 49, 55, 0.12);
-  box-shadow: 0 6px 20px rgba(185, 49, 55, 0.12);
-
-  /* KORREKTUR: HIER IST DIE FEHLENDE TRANSITION FÜR DEN "SMOOTH FADE" */
+  border-bottom: 1px solid rgba(185, 49, 55, 0.12);  
   transition: transform 0.3s ease-in-out;
 }
 
@@ -20,7 +17,6 @@ nav {
   align-items: center;
 }
 
-/* KORREKTUR: Die erste, veraltete .logo-link Regel wurde entfernt, um Konflikte zu vermeiden */
 
 .logo {
   height: auto;
@@ -29,7 +25,6 @@ nav {
   display: block;
 }
 
-/* Dies ist die korrekte .logo-link Regel, die du gestaltet hast */
 .logo-link {
   display: inline-flex;
   align-items: center;
@@ -42,7 +37,6 @@ nav {
   gap: 0;
 }
 
-/* Der Hover-Effekt (klar und interaktiv) */
 .logo-link:hover {
   transform: none;
   box-shadow: none;
@@ -76,6 +70,11 @@ nav {
 .nav-btn:hover {
   background-color: var(--primary-dark);
   transform: translateY(-2px);
+}
+
+.nav-btn.active {
+  background-color: var(--primary-dark);
+  box-shadow: 0 0 0 2px var(--primary-soft);
 }
 
 .nav-btn svg {
@@ -134,11 +133,8 @@ nav {
 
 .nav-btn .icon,
 .nav-btn .bi-book {
-  /* Größe für beide Icons vereinheitlichen */
   width: 24px;
   height: 24px;
-
-  /* Vertikale Ausrichtung (optional, aber empfohlen) */
   vertical-align: middle;
 }
 
@@ -181,7 +177,7 @@ nav {
 
 @media (max-width: 450px) {
     .logo {
-        width: 125px;   /* ensure crisp scaling */
+        width: 125px;
         height: auto;
         max-height: 50px;
     }

@@ -7,6 +7,10 @@
     "test": "jest",
     "test:selenium:tzr": "node src/selenium/tzr.e2e.js",
     "test:selenium:lisa": "node src/selenium/tzr-scenario1-lisa.e2e.js",
+    "test:selenium:lukas": "node src/selenium/tzr-scenario2-lukas.e2e.js",
+    "test:selenium:paul": "node src/selenium/tzr-scenario3-paul.e2e.js",
+    "test:selenium:marie": "node src/selenium/tzr-scenario4-marie.e2e.js",
+
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",

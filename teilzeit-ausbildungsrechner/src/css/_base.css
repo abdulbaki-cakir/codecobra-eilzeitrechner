@@ -1,102 +1,170 @@
-
 /* --- Base Styles --- */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap");
 
 :root {
-    --primary: #b93137;
-    --primary-dark: #a02a2f;
-    --primary-soft: #f4eded;
-    --bg-color: #fcf9f9;
-    --text-color: #1f1f1f;
-    --text-light: #555;
-    --primary-button-bg: var(--primary);
-    --primary-button-text: #fff;
-    --card-bg: #fff;
-    --card-shadow: 0 18px 45px -20px rgba(0, 0, 0, 0.3);
-    --card-border: rgba(185, 49, 55, 0.15);
-    --calculator-input-bg: #f4eded;
+  --primary: #b93137;
+  --primary-dark: #a02a2f;
+  --primary-soft: #ecd6d6;
+  --bg-color: #faf4f4;
+  --text-color: #1f1f1f;
+  --text-light: #555;
+  --primary-button-bg: var(--primary);
+  --primary-button-text: #fff;
+  --card-bg: #fff;
+  --card-shadow: 0 18px 45px -20px rgba(0, 0, 0, 0.3);
+  --card-border: rgba(185, 49, 55, 0.15);
+  --calculator-input-bg: #ecd6d6;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    scroll-behavior: smooth !important;
-    height: 100%;
+  scroll-behavior: smooth !important;
+  height: 100%;
 }
 
 body {
-    font-family: 'Manrope', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    overflow-x: hidden;
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  font-family: "Manrope", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .icon {
-    width: 24px;
-    height: 24px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    object-fit: contain;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
 }
 
 main {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .content-section {
-    padding-top: 150px;
-    padding-bottom: 50px;
-    min-height: 50vh;
+  padding-top: 150px;
+  padding-bottom: 50px;
+  min-height: 50vh;
 }
-
 
 /* ==========================================================================
     Datenschutz.html
 ==========================================================================
 */
 
-
 .content-section h2 {
-    margin-top: 2em;
-    margin-bottom: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 1.5em;
 }
 
 .content-section h3 {
-    margin-top: 2em;
-    margin-bottom: 1em;
+  margin-top: 2em;
+  margin-bottom: 1em;
 }
 
 .content-section p {
-    margin-bottom: 1.5em;
+  margin-bottom: 1.5em;
 }
 
 .content-section ul {
-    margin-left: 20px;
-    padding-left: 1em;
-    margin-bottom: 1.5em;
+  margin-left: 20px;
+  padding-left: 1em;
+  margin-bottom: 1.5em;
 }
 
 .content-section li {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
-
 
 .content-section li:last-child,
 .content-section p:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* --- Toggle Switch CSS --- */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0; /* Fix: Replaced top/left/right/bottom with inset */
+  background-color: #ccc; /* Grau wenn aus */
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider::before {
+  /* Fix: Used double colon */
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+/* Styling für das Dropdown Layout */
+.easy-language-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  gap: 15px;
+  white-space: nowrap;
+}
+
+/* Grün wenn an */
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #4caf50;
+}
+
+input:checked + .slider::before {
+  /* Fix: Used double colon */
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+/* Runde Ecken für den Slider */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round::before {
+  /* Fix: Used double colon */
+  border-radius: 50%;
 }

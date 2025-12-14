@@ -8,16 +8,18 @@ import {
 
 const BASE_URL = process.env.TZR_BASE_URL ?? 'http://localhost:5173';
 
-export async function runScenarioLisa() {
+export async function runScenarioLukas() {
   // WebDriver erstellen (lokal oder CI-Remote)
   const driver = await createDriver();
 
   try {
-    console.log('Starte Szenario 1 – Bürokauffrau mit Kleinkind (Lisa, 23).');
+    console.log(
+      'Starte Szenario 2 – Lukas (19), Einzelhandel, Teilzeit 30h, 42 Monate.'
+    );
 
-    // Startseite aufrufen
+    // Startseite öffnen
     await driver.get(`${BASE_URL}/`);
-    await driver.sleep(1000); // kurze Stabilisierung nach Seitenstart
+    await driver.sleep(500); // kurze Stabilisierung nach Seitenstart
 
     // ===== STEP 1: Basisdaten =====
     console.log('Step 1: Basisdaten ausfüllen');
@@ -25,15 +27,15 @@ export async function runScenarioLisa() {
     // Vertragliche Vollzeitstunden
     await typeNumberById(driver, 'vollzeitstunden', 40);
 
-    // Tatsächliche Teilzeit-Wochenstunden
-    await typeNumberById(driver, 'wochenstunden', 26);
+    // Teilzeit-Wochenstunden
+    await typeNumberById(driver, 'wochenstunden', 30);
 
     // Reguläre Ausbildungsdauer in Monaten
     const ausbildungsdauerSelect = await waitVisibleById(
       driver,
       'ausbildungsdauer'
     );
-    await ausbildungsdauerSelect.sendKeys('36');
+    await ausbildungsdauerSelect.sendKeys('42');
 
     // Ausbildung startet direkt in Teilzeit
     await clickRadioByNameAndValue(driver, 'part-time-start-radio', '0');
@@ -47,23 +49,23 @@ export async function runScenarioLisa() {
     // Sicherstellen, dass Step 2 sichtbar ist
     await waitVisibleById(driver, 'step-2');
 
-    // Alter über 21 Jahre
-    await clickRadioByNameAndValue(driver, 'age-radio', '12');
+    // Lukas ist 19 → nicht über 21
+    await clickRadioByNameAndValue(driver, 'age-radio', '0');
 
-    // Schulabschluss: Mittlere Reife
-    await clickRadioByNameAndValue(driver, 'school-finish-radio', '6');
+    // Schulabschluss: Abitur
+    await clickRadioByNameAndValue(driver, 'school-finish-radio', '12');
 
-    // Relevante Berufserfahrung (Praktikum)
+    // Relevante Berufserfahrung: Praktikum im Verkauf
     await clickRadioByNameAndValue(driver, 'experience-radio', '12');
 
     // Keine abgeschlossene Ausbildung
     await clickRadioByNameAndValue(driver, 'apprenticeship-radio', '0');
 
-    // Kein Studium
+    // Kein Studium (im Szenario nicht vorhanden)
     await clickRadioByNameAndValue(driver, 'study-radio', '0');
 
-    // Kind vorhanden → relevante Betreuungspflichten
-    await clickRadioByNameAndValue(driver, 'child-care-radio', '12');
+    // Keine Kinder
+    await clickRadioByNameAndValue(driver, 'child-care-radio', '0');
 
     // Keine Pflege von Angehörigen
     await clickRadioByNameAndValue(driver, 'family-care-radio', '0');
@@ -86,7 +88,7 @@ export async function runScenarioLisa() {
     const finalDurationText = await finalDurationEl.getText();
 
     console.log(
-      'Gesamtausbildungsdauer ab Beginn (Lisa, Szenario 1):',
+      'Gesamtausbildungsdauer ab Beginn (Lukas, Szenario 2):',
       finalDurationText
     );
 
@@ -98,12 +100,15 @@ export async function runScenarioLisa() {
     const extensionEl = await waitVisibleById(driver, 'extension-card-value');
 
     console.log('Gesamte Verkürzung (Monate):', await shorteningEl.getText());
-    console.log('Verlängerung durch Teilzeit (Monate):', await extensionEl.getText());
+    console.log(
+      'Verlängerung durch Teilzeit (Monate):',
+      await extensionEl.getText()
+    );
 
-    console.log('Szenario 1 – Testlauf erfolgreich abgeschlossen.');
+    console.log('Szenario 2 – Testlauf erfolgreich abgeschlossen.');
   } catch (err) {
     // Fehler im Szenario → Pipeline/Testlauf als fehlgeschlagen markieren
-    console.error('Szenario 1 – Test fehlgeschlagen:', err);
+    console.error('Szenario 2 – Test fehlgeschlagen:', err);
     process.exitCode = 1;
   } finally {
     // Browser immer sauber schließen
@@ -111,7 +116,7 @@ export async function runScenarioLisa() {
   }
 }
 
-runScenarioLisa().catch((err) => {
-  console.error('Szenario 1 – Unbehandelter Fehler:', err);
+runScenarioLukas().catch((err) => {
+  console.error('Szenario 2 – Unbehandelter Fehler:', err);
   process.exitCode = 1;
 });
